@@ -1,0 +1,2920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A private, password-gated page — a growing tree, a year of memories, and a little love story.">
+<meta name="theme-color" content="#140e10">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:title" content="Our Tree">
+<meta property="og:description" content="A private page for the two of us.">
+<meta property="og:type" content="website">
+<meta name="format-detection" content="telephone=no, date=no">
+<title>Our Tree</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 29 C6 21 2 15 2 10 C2 5 6 2 10 2 C13 2 15 4 16 6 C17 4 19 2 22 2 C26 2 30 5 30 10 C30 15 26 21 16 29 Z' fill='%23d9738f'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bark: #6b4a3a;
+    --bloom: #f0a8c0;
+    --leaf-deep: #2f5a3a;
+    --leaf-light: #6fa668;
+    --grass-deep: #1d3d24;
+    --grass-light: #4c7a45;
+    --sky-top: #f7c9d6;
+    --sky-mid: #f2b3c9;
+    --sky-bottom: #e6d3a8;
+    --bg-deep: #140e10;
+    --paper: #fbeee4;
+    --paper-dim: #d9c2b9;
+    --rose: #d9738f;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; min-height:100%;
+    background: radial-gradient(ellipse at 50% 10%, #2a1720 0%, var(--bg-deep) 55%), var(--bg-deep);
+    font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    color: var(--paper);
+    scrollbar-color: rgba(217,115,143,0.5) var(--bg-deep);
+    scrollbar-width: thin;
+  }
+  body{ animation: pageFadeIn 0.7s ease; }
+  @keyframes pageFadeIn{ from{ opacity:0; } to{ opacity:1; } }
+  ::-webkit-scrollbar{ width:10px; height:10px; }
+  ::-webkit-scrollbar-track{ background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb{ background: rgba(217,115,143,0.4); border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover{ background: rgba(217,115,143,0.7); }
+  :focus-visible{ outline: 2px solid var(--rose); outline-offset: 2px; }
+  .hidden{ display:none !important; }
+
+  /* ---------- GATE ---------- */
+  #gate{ min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 24px; position: relative; overflow: hidden; }
+  .floatingHearts{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+  .floatingHearts span{
+    position:absolute; bottom:-10%; font-size: 1.3rem; color: rgba(217,115,143,0.3);
+    animation-name: floatUp; animation-timing-function: linear; animation-iteration-count: infinite;
+  }
+  @keyframes floatUp{
+    0%{ transform: translateY(0) rotate(0deg); opacity:0; }
+    10%{ opacity:1; }
+    90%{ opacity:1; }
+    100%{ transform: translateY(-115vh) rotate(25deg); opacity:0; }
+  }
+  .gate-card{ position:relative; z-index:1; }
+  .gate-card{ width: 100%; max-width: 380px; text-align:center; }
+  .gate-card .heart{ font-size: 1.6rem; color: var(--rose); margin-bottom: 6px; animation: heartbeat 1.6s ease-in-out infinite; }
+  @keyframes heartbeat{ 0%,100%{ transform: scale(1); } 25%{ transform: scale(1.15); } 40%{ transform: scale(1); } }
+  .gate-card h1{ font-size: 1.9rem; font-weight: 500; margin: 0 0 8px; }
+  .gate-card p{ font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.85rem; color: var(--paper-dim); margin: 0 0 28px; line-height: 1.5; }
+  #passInput{
+    width: 100%; padding: 13px 16px; border-radius: 10px;
+    border: 1px solid rgba(217,115,143,0.3); background: rgba(255,255,255,0.04);
+    color: var(--paper); font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.95rem;
+    outline: none; letter-spacing: 1px;
+  }
+  #passInput:focus{ border-color: rgba(217,115,143,0.8); }
+  #enterBtn{
+    margin-top: 14px; width: 100%; padding: 13px 16px; border-radius: 10px; border: none;
+    background: var(--rose); color: #2a1017; font-weight: 600;
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.9rem; cursor: pointer;
+  }
+  #enterBtn:hover{ background:#e888a4; }
+  #gateError{ margin-top: 14px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.8rem; color: #e08787; min-height: 1.2em; }
+
+  /* ---------- SHARED CHROME ---------- */
+  .wrap{ max-width: 1000px; margin: 0 auto; padding: 40px 24px 70px; }
+  .topbar{ display:flex; justify-content:space-between; align-items:flex-start; gap: 16px; margin-bottom: 26px; }
+  .eyebrow-free-title{ font-size: clamp(1.9rem, 4.5vw, 2.9rem); line-height: 1.05; margin: 0 0 8px; font-weight: 500; }
+  .subtitle{ font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.9rem; color: var(--paper-dim); max-width: 58ch; line-height: 1.55; margin: 0; }
+  .badge{ font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.7rem; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(217,115,143,0.35); color: var(--paper-dim); white-space: nowrap; }
+  .signOut{ background:none; border:none; color: rgba(251,238,228,0.4); font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.72rem; text-decoration: underline; cursor: pointer; margin-top: 8px; padding: 0; }
+  .stage{ position: relative; margin-top: 18px; border-radius: 20px; background: #0e0a0b; border: 1px solid rgba(217,115,143,0.18); box-shadow: 0 40px 90px -30px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,255,255,0.03); overflow: hidden; }
+  canvas{
+    display:block; width: 100%; height: auto; touch-action: manipulation;
+    -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;
+  }
+  #devFuchkaCanvas, #viewerFuchkaCanvas{ cursor: pointer; }
+
+  .counter{
+    margin-top: 20px; text-align:center; font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  .counter .num{ font-family: 'Iowan Old Style', Georgia, serif; font-size: 2.2rem; color: var(--rose); line-height:1; }
+  .counter .lbl{ font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--paper-dim); margin-top: 4px; }
+  .story{
+    margin-top: 18px; text-align:center; font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.88rem; color: var(--paper-dim); font-style: italic; line-height: 1.6;
+    max-width: 60ch; margin-left:auto; margin-right:auto;
+  }
+
+  /* ---------- DEV CONTROLS ---------- */
+  .controls{ margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 22px 28px; font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .field label{ display:flex; justify-content: space-between; font-size: 0.78rem; color: var(--paper-dim); margin-bottom: 8px; }
+  .field label span.val{ color: var(--rose); font-variant-numeric: tabular-nums; }
+  .field input[type="text"], .field input[type="date"], .field textarea{
+    width:100%; padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(217,115,143,0.25);
+    background: rgba(255,255,255,0.04); color: var(--paper); font-family: inherit; font-size: 0.85rem; outline:none;
+  }
+  .field textarea{ resize: vertical; min-height: 60px; }
+  input[type="range"]{ -webkit-appearance: none; width: 100%; height: 3px; border-radius: 2px; background: rgba(251,238,228,0.15); outline: none; }
+  input[type="range"]::-webkit-slider-thumb{ -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--rose); border: 2px solid #1a1012; cursor: pointer; margin-top: -6px; }
+  input[type="range"]::-moz-range-thumb{ width: 12px; height: 12px; border-radius: 50%; background: var(--rose); border: 2px solid #1a1012; cursor: pointer; }
+  .colorField{ display:flex; align-items:center; gap:10px; }
+  .colorField input[type="color"]{ width: 34px; height: 34px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: none; cursor: pointer; padding:0; }
+  .row-buttons{ margin-top: 28px; display:flex; gap: 12px; flex-wrap: wrap; font-family: 'Helvetica Neue', Arial, sans-serif; }
+  button.pill{ font-family: inherit; font-size: 0.8rem; padding: 11px 20px; border-radius: 999px; border: 1px solid rgba(217,115,143,0.35); background: transparent; color: var(--paper); cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease; }
+  button.pill:hover{ background: rgba(217,115,143,0.12); border-color: rgba(217,115,143,0.7); }
+  button.pill:active{ transform: scale(0.97); }
+  button.pill.primary{ background: var(--rose); color: #2a1017; border-color: var(--rose); font-weight: 600; }
+  button.pill.primary:hover{ background: #e888a4; }
+  footer{ margin-top: 36px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.72rem; color: rgba(251,238,228,0.35); line-height: 1.6; }
+
+  /* ---------- SCENE TABS ---------- */
+  .sceneTabs{ display:flex; gap:10px; margin-bottom: 6px; font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .sceneTab{
+    font-family: inherit; font-size: 0.8rem; padding: 9px 16px; border-radius: 999px;
+    border: 1px solid rgba(217,115,143,0.3); background: transparent; color: var(--paper-dim); cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease;
+  }
+  .sceneTab:hover{ background: rgba(217,115,143,0.1); transform: translateY(-1px); }
+  .sceneTab.active{ background: var(--rose); color:#2a1017; border-color: var(--rose); font-weight:600; }
+
+  @keyframes sceneFadeIn{ from{ opacity:0; transform: translateY(6px);} to{ opacity:1; transform: translateY(0);} }
+  .sceneFade{ animation: sceneFadeIn 0.4s ease; }
+
+  /* ---------- FUCHKA SCENE ---------- */
+  .fuchkaWrap{ position: relative; }
+  .spiceRow{ margin-top: 20px; display:flex; gap: 12px; flex-wrap: wrap; font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .spiceBtn{
+    font-family: inherit; font-size: 0.8rem; padding: 11px 18px; border-radius: 999px;
+    border: 1px solid rgba(217,115,143,0.35); background: transparent; color: var(--paper); cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .spiceBtn:hover{ background: rgba(217,115,143,0.12); border-color: rgba(217,115,143,0.7); }
+  .spiceBtn.selected{ background: var(--rose); color:#2a1017; border-color: var(--rose); font-weight:600; }
+  .eatenLine{
+    margin-top: 16px; text-align:center; font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem; color: var(--paper-dim);
+  }
+  .eatenLine span{ color: var(--rose); font-weight: 700; }
+  .fuchkaHint{
+    margin-top: 10px; text-align:center; font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.76rem; color: rgba(251,238,228,0.4); font-style: italic;
+  }
+
+  /* ---------- POPUP MODAL ---------- */
+  #fuchkaModal{
+    position: fixed; inset: 0; background: rgba(10,6,7,0.6);
+    display:flex; align-items:center; justify-content:center; z-index: 50; padding: 20px;
+  }
+  .modalCard{
+    max-width: 340px; width:100%; background: #1c1315; border: 1px solid rgba(217,115,143,0.35);
+    border-radius: 18px; padding: 30px 26px; text-align:center;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8);
+  }
+  .modalCard .emoji{ font-size: 2rem; margin-bottom: 10px; }
+  .modalCard p{
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.92rem;
+    color: var(--paper); line-height: 1.55; margin: 0 0 20px;
+  }
+  .modalCard button{
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.85rem; padding: 11px 22px;
+    border-radius: 999px; border: none; background: var(--rose); color: #2a1017; font-weight:600; cursor:pointer;
+  }
+  .modalCard button:hover{ background:#e888a4; }
+
+  /* ---------- JOURNEY SCENE ---------- */
+  .journeyIntro{
+    text-align:center; font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem; color: var(--paper-dim); font-style: italic; margin: 4px 0 10px;
+  }
+  .journeyPath{ position:relative; padding: 20px 0 10px; }
+  .journeyPath::before{
+    content:''; position:absolute; left:50%; top:30px; bottom:70px; width:2px;
+    background: repeating-linear-gradient(to bottom, rgba(217,115,143,0.55) 0 8px, transparent 8px 16px);
+    transform: translateX(-50%);
+  }
+  .journeyNode{
+    position:relative; display:flex; flex-direction:column; align-items:center;
+    margin: 20px 0; z-index:1;
+  }
+  .nodeDot{
+    width:58px; height:58px; border-radius:50%; background: var(--rose); color:#2a1017;
+    font-weight:700; font-size:0.82rem; border:3px solid #1c1315; cursor:pointer;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    box-shadow: 0 10px 22px -6px rgba(0,0,0,0.55);
+    transition: transform 0.15s ease;
+    position: relative;
+  }
+  .nodeDot:hover{ transform: scale(1.06); }
+  .journeyNode.visited .nodeDot::after{
+    content:'✓'; position:absolute; top:-4px; right:-4px; width:17px; height:17px;
+    border-radius:50%; background:#5c9a52; color:#fff; font-size:10px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px #14100e;
+  }
+  .journeyNode.comingSoon .nodeDot{
+    background: transparent; color: var(--rose); border: 3px dashed var(--rose);
+    animation: pulseDot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulseDot{ 0%,100%{ box-shadow:0 0 0 0 rgba(217,115,143,0.35);} 50%{ box-shadow:0 0 0 10px rgba(217,115,143,0);} }
+  .nodeLabel{ margin-top: 9px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.85rem; color: var(--paper-dim); }
+  .nodeDetail{
+    max-height:0; overflow:hidden; transition: max-height 0.4s ease;
+    width: min(440px, 90%); text-align:center;
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.85rem; color: var(--paper-dim);
+    background: rgba(255,255,255,0.03); border-radius: 12px; margin-top: 8px;
+  }
+  .journeyNode.open .nodeDetail{ max-height: 640px; padding: 14px 16px; }
+  .journeyNode.comingSoon .nodeDetail{ max-height: 240px; padding: 16px 18px; }
+  .journeyNode.dreamNode .nodeDot{
+    background: transparent; color: #d6c7f5; border: 3px solid #a98fe0;
+    animation: pulseDot 2.4s ease-in-out infinite;
+  }
+  .journeyNode.dreamNode.open .nodeDetail{ max-height: 640px; }
+  .dreamCaption{
+    text-align:center; font-family: 'Iowan Old Style', Georgia, serif;
+    font-style: italic; font-size: 1.3rem; color: #d6c7f5; margin: 6px 0 10px;
+  }
+  canvas.dreamy{ filter: blur(1.6px) brightness(1.05) saturate(0.9); }
+  .nodeDetail textarea{
+    width:100%; min-height: 60px; background: transparent; border: none; outline:none;
+    color: var(--paper); font-family: inherit; font-size: 0.85rem; text-align:center; resize: vertical;
+  }
+  .journeyTimer{
+    font-family: 'Iowan Old Style', Georgia, serif; font-size: 1.5rem; color: var(--rose); margin-top: 4px;
+  }
+  .journeyTimerLbl{ font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--paper-dim); margin-top: 4px; }
+  .miniStage{
+    margin: 4px 0 10px; border-radius: 14px; overflow:hidden;
+    border: 1px solid rgba(217,115,143,0.2); background:#0b0e14;
+  }
+  .miniStage canvas{ width:100%; height:auto; display:block; }
+</style>
+</head>
+<body>
+
+<!-- ================= GATE ================= -->
+<div id="gate">
+  <div class="floatingHearts">
+    <span style="left:8%; animation-duration:9s; animation-delay:0s;">♥</span>
+    <span style="left:20%; animation-duration:12s; animation-delay:2s;">♡</span>
+    <span style="left:35%; animation-duration:10s; animation-delay:4s;">♥</span>
+    <span style="left:52%; animation-duration:14s; animation-delay:1s;">♡</span>
+    <span style="left:68%; animation-duration:11s; animation-delay:3s;">♥</span>
+    <span style="left:80%; animation-duration:13s; animation-delay:5s;">♡</span>
+    <span style="left:92%; animation-duration:9.5s; animation-delay:2.5s;">♥</span>
+  </div>
+  <div class="gate-card">
+    <div class="heart">♥</div>
+    <h1>My Baunoo and my love story</h1>
+    <p>Enter a password. The developer password opens the full editor.<br>The viewer password opens the scene to just watch.</p>
+    <input id="passInput" type="password" placeholder="Password" autocomplete="off">
+    <button id="enterBtn">Enter</button>
+    <div id="gateError"></div>
+  </div>
+</div>
+
+<!-- ================= DEVELOPER VIEW ================= -->
+<div id="devView" class="hidden">
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1 class="eyebrow-free-title">Under our tree</h1>
+        <p class="subtitle">A lily-ringed tree on lush ground, with the two of you cuddled at the roots. Edit anything — the tree, the lilies, the sky, your names, your story.</p>
+      </div>
+      <div style="text-align:right;">
+        <span class="badge">Developer mode</span><br>
+        <button class="signOut" onclick="signOut()">Sign out</button>
+      </div>
+    </div>
+
+    <div class="sceneTabs">
+      <button class="sceneTab active" data-scene="tree" onclick="switchScene('dev','tree')">🌳 The tree</button>
+      <button class="sceneTab" data-scene="fuchka" onclick="switchScene('dev','fuchka')">🥟 Fuchka time</button>
+      <button class="sceneTab" data-scene="journey" onclick="switchScene('dev','journey')">🗺️ Our journey</button>
+    </div>
+
+    <div id="devSceneTree">
+      <div class="stage"><canvas id="devCanvas" width="1100" height="820">A lily-ringed tree with a couple sitting together beneath it.</canvas></div>
+
+      <div class="controls">
+        <div class="field"><label>Trunk height <span class="val" id="lenVal">150</span></label><input type="range" id="len" min="90" max="220" value="150"></div>
+        <div class="field"><label>Branch angle <span class="val" id="angVal">24°</span></label><input type="range" id="ang" min="10" max="40" value="24"></div>
+        <div class="field"><label>Shrink ratio <span class="val" id="ratioVal">0.78</span></label><input type="range" id="ratio" min="60" max="86" value="78"></div>
+        <div class="field"><label>Canopy fullness <span class="val" id="minVal">10</span></label><input type="range" id="minlen" min="6" max="20" value="10"></div>
+        <div class="field"><label>Lilies around roots <span class="val" id="lilyVal">9</span></label><input type="range" id="lilyCount" min="0" max="18" value="9"></div>
+        <div class="field colorField"><label style="width:100%;">Sky colour</label><input type="color" id="skyColor" value="#f2b3c9"></div>
+        <div class="field colorField"><label style="width:100%;">Leaf colour</label><input type="color" id="leafColor" value="#4c7a45"></div>
+        <div class="field colorField"><label style="width:100%;">Lily colour</label><input type="color" id="lilyColor" value="#fdfaf3"></div>
+        <div class="field"><label style="width:100%;">Your name</label><input type="text" id="nameA" value="You"></div>
+        <div class="field"><label style="width:100%;">Their name</label><input type="text" id="nameB" value="Them"></div>
+        <div class="field"><label style="width:100%;">Anniversary date</label><input type="date" id="annivDate"></div>
+        <div class="field" style="grid-column: 1 / -1;"><label style="width:100%;">A line for your story</label><textarea id="storyText">Every season, the same roots — just a little taller.</textarea></div>
+      </div>
+
+      <div id="devCounter" class="counter"></div>
+      <div id="devStory" class="story"></div>
+
+      <div class="row-buttons">
+        <button class="pill primary" id="growBtn">Regrow tree</button>
+        <button class="pill" id="animateBtn">Animate growth</button>
+        <button class="pill" id="windBtn">Add a breeze</button>
+      </div>
+
+      <footer>Same branching recursion as before (forward → bloom → split left/right → shrink → return), now dressed as a lily-ringed anniversary tree with a couple resting at the roots.</footer>
+    </div>
+
+    <div id="devSceneFuchka" class="hidden fuchkaWrap">
+      <div class="stage"><canvas id="devFuchkaCanvas" width="1100" height="680">A plate of fuchka to spice and eat.</canvas></div>
+      <div class="spiceRow" id="devSpiceRow">
+        <button class="spiceBtn" data-spice="tamarind">Tamarind water</button>
+        <button class="spiceBtn" data-spice="chili">Chili powder</button>
+        <button class="spiceBtn" data-spice="onion">Onion &amp; chickpea</button>
+        <button class="spiceBtn" data-spice="mint">Mint chutney</button>
+      </div>
+      <div class="eatenLine">Eaten so far: <span id="devEatenCount">0</span></div>
+      <div class="fuchkaHint">Pick a spice, then tap a fuchka to spice it — tap again to eat it.</div>
+    </div>
+
+    <div id="devSceneJourney" class="hidden">
+      <p class="journeyIntro">A trail through the year — tap a stop to open it, and edit its note below.</p>
+      <div class="journeyPath" id="devJourneyPath"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= VIEWER VIEW ================= -->
+<div id="viewerView" class="hidden">
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1 class="eyebrow-free-title">Under our tree</h1>
+        <p class="subtitle">Just watch — fireflies drift, leaves sway, the tree breathes.</p>
+      </div>
+      <div style="text-align:right;">
+        <span class="badge">Viewer mode</span><br>
+        <button class="signOut" onclick="signOut()">Sign out</button>
+      </div>
+    </div>
+    <div class="sceneTabs">
+      <button class="sceneTab active" data-scene="tree" onclick="switchScene('viewer','tree')">🌳 The tree</button>
+      <button class="sceneTab" data-scene="fuchka" onclick="switchScene('viewer','fuchka')">🥟 Fuchka time</button>
+      <button class="sceneTab" data-scene="journey" onclick="switchScene('viewer','journey')">🗺️ Our journey</button>
+    </div>
+
+    <div id="viewerSceneTree">
+      <div class="stage"><canvas id="viewerCanvas" width="1100" height="820">A lily-ringed tree with a couple sitting together beneath it, cycling through the seasons and time of day.</canvas></div>
+      <div id="viewerCounter" class="counter"></div>
+      <div id="viewerStory" class="story"></div>
+    </div>
+
+    <div id="viewerSceneFuchka" class="hidden fuchkaWrap">
+      <div class="stage"><canvas id="viewerFuchkaCanvas" width="1100" height="680">A plate of fuchka to spice and eat.</canvas></div>
+      <div class="spiceRow" id="viewerSpiceRow">
+        <button class="spiceBtn" data-spice="tamarind">Tamarind water</button>
+        <button class="spiceBtn" data-spice="chili">Chili powder</button>
+        <button class="spiceBtn" data-spice="onion">Onion &amp; chickpea</button>
+        <button class="spiceBtn" data-spice="mint">Mint chutney</button>
+      </div>
+      <div class="eatenLine">Eaten so far: <span id="viewerEatenCount">0</span></div>
+      <div class="fuchkaHint">Pick a spice, then tap a fuchka to spice it — tap again to eat it.</div>
+    </div>
+
+    <div id="viewerSceneJourney" class="hidden">
+      <p class="journeyIntro">A trail through the year — tap a stop to open it.</p>
+      <div class="journeyPath" id="viewerJourneyPath"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SHARED POPUP MODAL ================= -->
+<div id="fuchkaModal" class="hidden">
+  <div class="modalCard">
+    <div class="emoji">🥟😋</div>
+    <p id="fuchkaModalMsg">Two down already? Careful, love — save a little room!</p>
+    <button onclick="closeFuchkaModal()">Okay, okay</button>
+  </div>
+</div>
+
+<script>
+/* ---------------- passwords ----------------
+   Change these two strings to whatever you like. */
+const DEV_PASSWORD    = "hedisss";
+const VIEWER_PASSWORD = "bubiesss";
+/* -------------------------------------------- */
+
+const gate = document.getElementById('gate');
+const devView = document.getElementById('devView');
+const viewerView = document.getElementById('viewerView');
+const passInput = document.getElementById('passInput');
+const gateError = document.getElementById('gateError');
+
+let viewerRAF = null;
+
+function tryEnter(){
+  const val = passInput.value.trim();
+  if (val === DEV_PASSWORD){
+    gate.classList.add('hidden'); devView.classList.remove('hidden'); initDev();
+  } else if (val === VIEWER_PASSWORD){
+    gate.classList.add('hidden'); viewerView.classList.remove('hidden'); initViewer();
+  } else {
+    gateError.textContent = "That password doesn't match either mode.";
+  }
+}
+document.getElementById('enterBtn').addEventListener('click', tryEnter);
+passInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryEnter(); });
+
+function signOut(){
+  if (viewerRAF) cancelAnimationFrame(viewerRAF);
+  devView.classList.add('hidden'); viewerView.classList.add('hidden');
+  gate.classList.remove('hidden'); passInput.value = ''; gateError.textContent = '';
+}
+
+/* ---------------- helpers ---------------- */
+function mixColor(c1, c2, t){
+  const parse = (c) => {
+    if (c[0] === '#'){
+      return [parseInt(c.slice(1,3),16), parseInt(c.slice(3,5),16), parseInt(c.slice(5,7),16)];
+    }
+    const m = c.match(/rgba?\(([^)]+)\)/);
+    if (m){
+      const parts = m[1].split(',').map(s => parseFloat(s));
+      return [parts[0], parts[1], parts[2]];
+    }
+    return [0,0,0];
+  };
+  const [r1,g1,b1] = parse(c1), [r2,g2,b2] = parse(c2);
+  return `rgb(${Math.round(r1+(r2-r1)*t)},${Math.round(g1+(g2-g1)*t)},${Math.round(b1+(b2-b1)*t)})`;
+}
+function makeRand(seed){ return (o) => { const x = Math.sin(o*12.9898+seed)*43758.5453; return x-Math.floor(x); }; }
+
+/* shared drawing helpers for the month scenes below */
+function roundedRectPath(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+function drawChatBubble(ctx, cx, topY, text, maxWidth, tailSide){
+  ctx.font = '13px Helvetica, Arial, sans-serif';
+  const words = text.split(' ');
+  let lines = [], cur = '';
+  words.forEach(w => {
+    const test = cur ? cur+' '+w : w;
+    if (ctx.measureText(test).width > maxWidth-24 && cur){ lines.push(cur); cur = w; }
+    else cur = test;
+  });
+  if (cur) lines.push(cur);
+
+  const lineH = 17, padY = 10;
+  const bw = maxWidth, bh = lines.length*lineH + padY*2;
+  const bx = cx - bw/2, by = topY - bh;
+
+  ctx.fillStyle = 'rgba(251,238,228,0.97)';
+  roundedRectPath(ctx, bx, by, bw, bh, 12);
+  ctx.fill();
+
+  const tailX = tailSide === 'right' ? bx+bw-18 : bx+18;
+  ctx.beginPath();
+  ctx.moveTo(tailX-6, by+bh);
+  ctx.lineTo(tailX+2, by+bh+10);
+  ctx.lineTo(tailX+8, by+bh);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = '#241118';
+  ctx.textAlign = 'center';
+  lines.forEach((ln,i) => ctx.fillText(ln, cx, by+padY+(i+0.75)*lineH));
+  ctx.textAlign = 'left';
+  return bh;
+}
+function drawTinyHeart(ctx, x, y, s, alpha){
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.scale(s,s);
+  ctx.beginPath();
+  ctx.moveTo(0,3);
+  ctx.bezierCurveTo(-6,-4, -14,2, 0,12);
+  ctx.bezierCurveTo(14,2, 6,-4, 0,3);
+  ctx.closePath();
+  ctx.fillStyle = `rgba(217,115,143,${alpha})`;
+  ctx.fill();
+  ctx.restore();
+}
+function drawClock(ctx, cx, cy, r, hour, minute){
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2);
+  ctx.fillStyle = '#f3ece0'; ctx.fill();
+  ctx.lineWidth = 3; ctx.strokeStyle = '#2a1e18'; ctx.stroke();
+  for (let i=0;i<12;i++){
+    const a = i*Math.PI/6;
+    ctx.strokeStyle = '#5a4632'; ctx.lineWidth = i%3===0 ? 3 : 1.5;
+    ctx.beginPath();
+    ctx.moveTo(Math.sin(a)*(r-7), -Math.cos(a)*(r-7));
+    ctx.lineTo(Math.sin(a)*(r-2), -Math.cos(a)*(r-2));
+    ctx.stroke();
+  }
+  const hourAngle = ((hour%12)+minute/60)/12*Math.PI*2;
+  const minAngle = (minute/60)*Math.PI*2;
+  ctx.strokeStyle = '#2a1e18'; ctx.lineCap = 'round';
+  ctx.lineWidth = 3.5;
+  ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(Math.sin(hourAngle)*r*0.5, -Math.cos(hourAngle)*r*0.5); ctx.stroke();
+  ctx.lineWidth = 2.2;
+  ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(Math.sin(minAngle)*r*0.76, -Math.cos(minAngle)*r*0.76); ctx.stroke();
+  ctx.beginPath(); ctx.arc(0,0,3,0,Math.PI*2); ctx.fillStyle = '#2a1e18'; ctx.fill();
+  ctx.restore();
+}
+
+
+function daysBetween(dateStr){
+  if (!dateStr) return null;
+  const start = new Date(dateStr);
+  const now = new Date();
+  return Math.max(0, Math.floor((now - start) / 86400000));
+}
+
+/* ---------------- scene painters ---------------- */
+function paintSky(ctx, W, H, skyColor){
+  const g = ctx.createLinearGradient(0,0,0,H*0.72);
+  g.addColorStop(0, mixColor(skyColor, '#f7e3c8', 0.15));
+  g.addColorStop(0.55, skyColor);
+  g.addColorStop(1, '#e9caa0');
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,W,H*0.72);
+
+  // soft sun glow
+  const glow = ctx.createRadialGradient(W*0.78, H*0.22, 10, W*0.78, H*0.22, 220);
+  glow.addColorStop(0, 'rgba(255,244,214,0.55)');
+  glow.addColorStop(1, 'rgba(255,244,214,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0,0,W,H*0.72);
+}
+
+function paintGround(ctx, W, H, rand){
+  const groundTop = H*0.66;
+  const g = ctx.createLinearGradient(0, groundTop, 0, H);
+  g.addColorStop(0, '#4c7a45');
+  g.addColorStop(1, '#1d3d24');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, groundTop, W, H-groundTop);
+
+  // grass texture strokes
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1.4;
+  for (let i=0;i<260;i++){
+    const gx = rand(i*3.1)*W;
+    const gy = groundTop + rand(i*7.7)* (H-groundTop);
+    const h = 6 + rand(i*5.3)*10;
+    ctx.beginPath();
+    ctx.moveTo(gx, gy);
+    ctx.lineTo(gx + (rand(i*9.1)-0.5)*4, gy - h);
+    ctx.stroke();
+  }
+}
+
+function drawLeafyBranch(ctx, rand, opts, x, y, angleDeg, len, depth){
+  const { minLen, ratio, splitAngle, bark, leaf, maxDepth, sway } = opts;
+  if (len < minLen || depth > maxDepth) return;
+
+  const a = (angleDeg + sway) * Math.PI/180;
+  const nx = x + Math.sin(a)*len;
+  const ny = y - Math.cos(a)*len;
+
+  const t = Math.min(depth/9, 1);
+  const w = Math.max(1, 11*(1-t)+0.8);
+  ctx.strokeStyle = mixColor(bark, '#8a6552', t);
+  ctx.lineWidth = w;
+  ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(nx,ny); ctx.stroke();
+
+  if (len < minLen*3.2){
+    const clusters = 3 + Math.floor(rand(x+y)*3);
+    for (let c=0;c<clusters;c++){
+      const r = 8 + rand(x*1.3+c)*10;
+      const ox = (rand(x-c*2)-0.5)*14;
+      const oy = (rand(y+c*3)-0.5)*14;
+      const variance = rand(c+x);
+      ctx.beginPath();
+      ctx.fillStyle = variance < 0.5
+        ? mixColor(leaf, '#16321a', (0.5-variance)*0.5)   // shaded side, deeper green
+        : mixColor(leaf, '#5c9a52', (variance-0.5)*0.4);  // sunlit side, still a real green
+      ctx.arc(nx+ox, ny+oy, r, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  const nextLen = len*ratio;
+  drawLeafyBranch(ctx, rand, opts, nx, ny, angleDeg-splitAngle, nextLen, depth+1);
+  drawLeafyBranch(ctx, rand, opts, nx, ny, angleDeg+splitAngle, nextLen, depth+1);
+}
+
+function drawLily(ctx, x, y, scale, color, rotation){
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(rotation);
+  ctx.scale(scale, scale);
+  // stem
+  ctx.strokeStyle = '#2f5a3a';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,18); ctx.stroke();
+  // leaf on stem
+  ctx.fillStyle = '#3c6a44';
+  ctx.beginPath();
+  ctx.ellipse(-6, 10, 7, 3, 0.5, 0, Math.PI*2);
+  ctx.fill();
+  // petals
+  ctx.fillStyle = color;
+  for (let i=0;i<6;i++){
+    const ang = (Math.PI*2/6)*i;
+    ctx.save();
+    ctx.rotate(ang);
+    ctx.beginPath();
+    ctx.ellipse(0,-9,3.6,9,0,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+  // center
+  ctx.fillStyle = '#e0a63f';
+  ctx.beginPath(); ctx.arc(0,0,2.6,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawCouple(ctx, x, y, scale){
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.scale(scale, scale);
+
+  // shared shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.18)';
+  ctx.beginPath();
+  ctx.ellipse(0, 8, 62, 12, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // --- boy (seated, left, leaning slightly back against the trunk) ---
+  ctx.save();
+  ctx.translate(-14, 0);
+  // legs (simple, folded)
+  ctx.fillStyle = '#3b3a45';
+  ctx.beginPath();
+  ctx.ellipse(6, 6, 30, 12, 0.15, 0, Math.PI*2);
+  ctx.fill();
+  // torso
+  ctx.fillStyle = '#5a6b8c';
+  ctx.beginPath();
+  ctx.moveTo(-22,-2);
+  ctx.quadraticCurveTo(-26,-46,-2,-50);
+  ctx.quadraticCurveTo(24,-48,22,-4);
+  ctx.quadraticCurveTo(0,10,-22,-2);
+  ctx.fill();
+  // arm around her
+  ctx.beginPath();
+  ctx.moveTo(14,-30);
+  ctx.quadraticCurveTo(40,-24,36,4);
+  ctx.quadraticCurveTo(30,14,18,6);
+  ctx.quadraticCurveTo(28,-16,10,-32);
+  ctx.fill();
+  // head
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(-4,-58,13,14,0,0,Math.PI*2); ctx.fill();
+  // hair
+  ctx.fillStyle = '#33261e';
+  ctx.beginPath();
+  ctx.moveTo(-17,-60);
+  ctx.quadraticCurveTo(-18,-76,-4,-76);
+  ctx.quadraticCurveTo(10,-76,8,-62);
+  ctx.quadraticCurveTo(0,-70,-8,-64);
+  ctx.quadraticCurveTo(-12,-68,-17,-60);
+  ctx.fill();
+  ctx.restore();
+
+  // --- girl (seated, resting head on his shoulder) ---
+  ctx.save();
+  ctx.translate(20, 4);
+  // legs
+  ctx.fillStyle = '#7a3f52';
+  ctx.beginPath();
+  ctx.ellipse(-4, 8, 26, 11, -0.1, 0, Math.PI*2);
+  ctx.fill();
+  // torso / dress
+  ctx.fillStyle = '#c9748f';
+  ctx.beginPath();
+  ctx.moveTo(-20,4);
+  ctx.quadraticCurveTo(-22,-34,-2,-40);
+  ctx.quadraticCurveTo(18,-38,18,2);
+  ctx.quadraticCurveTo(0,12,-20,4);
+  ctx.fill();
+  // head tilted onto his shoulder
+  ctx.save();
+  ctx.translate(-14,-42);
+  ctx.rotate(-0.42);
+  ctx.fillStyle = '#e9c1a0';
+  ctx.beginPath(); ctx.ellipse(0,0,12,13,0,0,Math.PI*2); ctx.fill();
+  // hair, longer, flowing down over the shoulder
+  ctx.fillStyle = '#4a2e22';
+  ctx.beginPath();
+  ctx.moveTo(-13,-4);
+  ctx.quadraticCurveTo(-16,-20,-1,-20);
+  ctx.quadraticCurveTo(13,-19,11,-2);
+  ctx.quadraticCurveTo(14,14,4,26);
+  ctx.quadraticCurveTo(2,10,-2,6);
+  ctx.quadraticCurveTo(-8,4,-13,-4);
+  ctx.fill();
+  ctx.restore();
+  ctx.restore();
+
+  ctx.restore();
+}
+
+function drawAlleyProposal(ctx, W, H, t){
+  // night sky
+  const sky = ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0, '#0a0f22');
+  sky.addColorStop(1, '#1c2340');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0,0,W,H);
+
+  // stars
+  for (let i=0;i<40;i++){
+    const sx = (i*97 % W);
+    const sy = (i*53 % (H*0.5));
+    const tw = 0.4 + 0.5*Math.abs(Math.sin(t*1.4 + i));
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${tw*0.7})`;
+    ctx.arc(sx, sy, 1.2, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  const floorY = H*0.78;
+  const wallW = W*0.20;
+
+  function brickWall(x0, w){
+    ctx.fillStyle = '#2e1e1c';
+    ctx.fillRect(x0, 0, w, floorY);
+    ctx.strokeStyle = 'rgba(90,60,50,0.55)';
+    ctx.lineWidth = 1;
+    const rowH = 18;
+    for (let y = 0, row = 0; y < floorY; y += rowH, row++){
+      ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x0+w,y); ctx.stroke();
+      const offset = (row % 2 === 0) ? 0 : 20;
+      for (let x = x0 - offset; x < x0+w; x += 40){
+        ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x,y+rowH); ctx.stroke();
+      }
+    }
+  }
+  brickWall(0, wallW);
+  brickWall(W-wallW, wallW);
+
+  // alley floor
+  const floorGrad = ctx.createLinearGradient(0, floorY, 0, H);
+  floorGrad.addColorStop(0, '#33333a');
+  floorGrad.addColorStop(1, '#17171b');
+  ctx.fillStyle = floorGrad;
+  ctx.fillRect(wallW, floorY, W-2*wallW, H-floorY);
+
+  function streetLamp(x){
+    const lampY = H*0.20;
+    // glow cone
+    const cone = ctx.createRadialGradient(x, lampY, 4, x, floorY, W*0.16);
+    const glowA = 0.28 + 0.06*Math.sin(t*2 + x);
+    cone.addColorStop(0, `rgba(255,225,150,${glowA+0.25})`);
+    cone.addColorStop(1, 'rgba(255,225,150,0)');
+    ctx.beginPath();
+    ctx.moveTo(x, lampY);
+    ctx.lineTo(x - W*0.09, floorY);
+    ctx.lineTo(x + W*0.09, floorY);
+    ctx.closePath();
+    ctx.fillStyle = cone;
+    ctx.fill();
+
+    // pole
+    ctx.strokeStyle = '#15151a';
+    ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.moveTo(x, lampY); ctx.lineTo(x, floorY); ctx.stroke();
+    // lamp head
+    ctx.fillStyle = '#20201f';
+    ctx.fillRect(x-10, lampY-14, 20, 10);
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,238,190,${0.85+0.1*Math.sin(t*2+x)})`;
+    ctx.arc(x, lampY-4, 6, 0, Math.PI*2);
+    ctx.fill();
+  }
+  streetLamp(W*0.30);
+  streetLamp(W*0.70);
+
+  function speechBubble(cx, topY, text){
+    ctx.font = '13px Helvetica, Arial, sans-serif';
+    const padX = 10, padY = 7;
+    const tw = ctx.measureText(text).width;
+    const bw = tw + padX*2, bh = 22 + padY;
+    const bx = cx - bw/2, by = topY - bh - 10;
+    ctx.fillStyle = 'rgba(251,238,228,0.95)';
+    ctx.beginPath();
+    ctx.moveTo(bx+10, by);
+    ctx.lineTo(bx+bw-10, by);
+    ctx.quadraticCurveTo(bx+bw, by, bx+bw, by+10);
+    ctx.lineTo(bx+bw, by+bh-10);
+    ctx.quadraticCurveTo(bx+bw, by+bh, bx+bw-10, by+bh);
+    ctx.lineTo(bx+10, by+bh);
+    ctx.quadraticCurveTo(bx, by+bh, bx, by+bh-10);
+    ctx.lineTo(bx, by+10);
+    ctx.quadraticCurveTo(bx, by, bx+10, by);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(cx-6, by+bh);
+    ctx.lineTo(cx+2, by+bh+10);
+    ctx.lineTo(cx+8, by+bh);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#241118';
+    ctx.textAlign = 'center';
+    ctx.fillText(text, cx, by + bh/2 + 5);
+    ctx.textAlign = 'left';
+  }
+
+  // --- boy: green jacket, kneeling close in front of her, offering flowers ---
+  const boyX = W*0.465, groundY = floorY;
+  const pantsColor = '#2b2b30';
+  ctx.save();
+  ctx.translate(boyX, groundY);
+
+  function roundedRect(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);
+    ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r);
+    ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h);
+    ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r);
+    ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  // back leg: knee planted on the ground behind him
+  ctx.fillStyle = pantsColor;
+  ctx.beginPath();
+  ctx.moveTo(4,-16);
+  ctx.quadraticCurveTo(-4,-4, 0,8);
+  ctx.quadraticCurveTo(4,14, 12,12);
+  ctx.quadraticCurveTo(16,4, 10,-8);
+  ctx.quadraticCurveTo(8,-13, 4,-16);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath(); ctx.ellipse(11,13,9,4.2,0.35,0,Math.PI*2); ctx.fill(); // back foot
+
+  // front leg: bent, foot planted forward
+  ctx.beginPath();
+  ctx.moveTo(-3,-16);
+  ctx.quadraticCurveTo(-13,-8,-17,4);
+  ctx.quadraticCurveTo(-15,11,-7,9);
+  ctx.quadraticCurveTo(-3,0,-1,-13);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath(); ctx.ellipse(-14,9,9,4.2,-0.25,0,Math.PI*2); ctx.fill(); // front foot
+
+  // backpack, worn on his back (the side away from her) — drawn before the jacket
+  // so the jacket overlaps the inner edge and the bag peeks out on the outside
+  roundedRect(-32,-50,18,36,5);
+  ctx.fillStyle = '#4a3826';
+  ctx.fill();
+  roundedRect(-27,-46,8,10,3);
+  ctx.fillStyle = '#5c4630';
+  ctx.fill();
+
+  // torso (jacket)
+  ctx.fillStyle = '#2f6b3f';
+  ctx.beginPath();
+  ctx.moveTo(-14,-14);
+  ctx.quadraticCurveTo(-18,-52,2,-56);
+  ctx.quadraticCurveTo(22,-52,18,-16);
+  ctx.quadraticCurveTo(2,-4,-14,-14);
+  ctx.fill();
+
+  // backpack straps, over the shoulders on top of the jacket
+  ctx.strokeStyle = '#3c2e1c'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(-2,-54); ctx.quadraticCurveTo(-14,-46,-18,-38); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(6,-54); ctx.quadraticCurveTo(-6,-44,-14,-32); ctx.stroke();
+
+  // extended arm holding flowers, reaching only a short distance since she's close
+  ctx.beginPath();
+  ctx.moveTo(12,-38);
+  ctx.quadraticCurveTo(28,-34,30,-20);
+  ctx.quadraticCurveTo(27,-14,20,-16);
+  ctx.quadraticCurveTo(19,-28,8,-42);
+  ctx.fillStyle = '#2f6b3f';
+  ctx.fill();
+
+  // bouquet, held right at the midpoint between the two of them
+  const bx = 32, by = -18;
+  const petalColors = ['#f0a8c0','#fdfaf3','#f4d35e'];
+  for (let i=0;i<7;i++){
+    const ang = i*0.9;
+    ctx.beginPath();
+    ctx.fillStyle = petalColors[i%3];
+    ctx.arc(bx+Math.cos(ang)*7, by+Math.sin(ang)*7, 5, 0, Math.PI*2);
+    ctx.fill();
+  }
+  ctx.strokeStyle = '#3c6a44'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(bx, by+6); ctx.lineTo(bx-4, by+20); ctx.stroke();
+
+  // head + hair
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(-2,-60,12,13,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#2a1e18';
+  ctx.beginPath();
+  ctx.moveTo(-14,-62); ctx.quadraticCurveTo(-15,-76,0,-76);
+  ctx.quadraticCurveTo(12,-76,10,-64); ctx.quadraticCurveTo(0,-70,-8,-66);
+  ctx.quadraticCurveTo(-10,-68,-14,-62); ctx.fill();
+  ctx.restore();
+  speechBubble(boyX-6, groundY-122, 'I love you.');
+
+  // --- girl: hijab, standing close, reaching down for his hand/the bouquet ---
+  const girlX = W*0.535;
+  ctx.save();
+  ctx.translate(girlX, groundY);
+
+  function roundedRectG(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);
+    ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r);
+    ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h);
+    ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r);
+    ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  // legs — loose salwar-style trousers, two clearly separate legs down to the feet
+  ctx.fillStyle = '#4a3550';
+  ctx.beginPath();
+  ctx.moveTo(-9,-34); ctx.quadraticCurveTo(-11,-14,-10,4);
+  ctx.quadraticCurveTo(-9,9,-3,8); ctx.quadraticCurveTo(-3,-8,-2,-33);
+  ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(-7,8,8,3.6,0.15,0,Math.PI*2); ctx.fill(); // left foot
+
+  ctx.beginPath();
+  ctx.moveTo(9,-34); ctx.quadraticCurveTo(11,-14,10,4);
+  ctx.quadraticCurveTo(9,9,3,8); ctx.quadraticCurveTo(3,-8,2,-33);
+  ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(7,8,8,3.6,-0.15,0,Math.PI*2); ctx.fill(); // right foot
+
+  // backpack, worn on her back (the side away from him) — drawn before the tunic top
+  roundedRectG(15,-46,17,34,5);
+  ctx.fillStyle = '#5a4a72';
+  ctx.fill();
+  roundedRectG(19,-42,8,9,3);
+  ctx.fillStyle = '#6d5b88';
+  ctx.fill();
+
+  // tunic top (kameez) — short, ending well above the knee so the legs stay visible
+  ctx.fillStyle = '#5a3f52';
+  ctx.beginPath();
+  ctx.moveTo(-17,-20); ctx.quadraticCurveTo(-21,-42,0,-47);
+  ctx.quadraticCurveTo(21,-42,17,-20);
+  ctx.quadraticCurveTo(0,-17,-17,-20); ctx.fill();
+
+  // backpack straps, over the shoulders on top of the tunic
+  ctx.strokeStyle = '#463a5c'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(2,-44); ctx.quadraticCurveTo(12,-40,17,-30); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-4,-44); ctx.quadraticCurveTo(6,-38,13,-24); ctx.stroke();
+
+  // arm reaching down and out toward him / the bouquet
+  ctx.beginPath();
+  ctx.moveTo(-13,-32);
+  ctx.quadraticCurveTo(-28,-24,-30,-8);
+  ctx.quadraticCurveTo(-27,-2,-20,-4);
+  ctx.quadraticCurveTo(-18,-16,-8,-34);
+  ctx.fillStyle = '#5a3f52';
+  ctx.fill();
+
+  // other arm resting down at her side, hand holding a small knife low and pointed down
+  ctx.beginPath();
+  ctx.moveTo(11,-30);
+  ctx.quadraticCurveTo(21,-16,18,6);
+  ctx.quadraticCurveTo(13,10,9,3);
+  ctx.quadraticCurveTo(12,-12,5,-32);
+  ctx.fill();
+  ctx.save();
+  ctx.translate(16, 6);
+  ctx.rotate(0.35);
+  ctx.fillStyle = '#c9c9c9';
+  ctx.fillRect(-1.5, 0, 3, 15);
+  ctx.fillStyle = '#5a4632';
+  ctx.fillRect(-2, 14, 4, 6);
+  ctx.restore();
+
+  // hijab drawn first — full dome over the head, draping down both sides to the shoulders
+  ctx.fillStyle = '#7a4f63';
+  ctx.beginPath();
+  ctx.moveTo(-19,-38);
+  ctx.quadraticCurveTo(-25,-68, 0,-75);
+  ctx.quadraticCurveTo(25,-68, 19,-38);
+  ctx.quadraticCurveTo(23,-18, 17,4);
+  ctx.lineTo(-17,4);
+  ctx.quadraticCurveTo(-23,-18, -19,-38);
+  ctx.closePath();
+  ctx.fill();
+
+  // face — painted after, so it sits framed inside the hijab
+  ctx.fillStyle = '#e9c1a0';
+  ctx.beginPath(); ctx.ellipse(0,-52,11,12.5,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+  speechBubble(girlX+4, groundY-120, 'Yes.');
+}
+
+function initJanuaryScene(mode){
+  const canvas = document.getElementById(mode + 'JanCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  let start = performance.now();
+  function loop(now){
+    const t = (now-start)/1000;
+    drawAlleyProposal(ctx, W, H, t);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
+/* ---------------- time-lapse: January to December, night to day ---------------- */
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function seasonLerp(frac, colors){
+  const n = colors.length;
+  const scaled = (((frac%1)+1)%1) * n;
+  const i0 = Math.floor(scaled) % n;
+  const i1 = (i0+1) % n;
+  const local = scaled - Math.floor(scaled);
+  return mixColor(colors[i0], colors[i1], local);
+}
+
+function getTimeLapse(yearFrac, dayFrac){
+  const skyStops  = ['#c9d9e8', '#f2d9e0', '#f2b3c9', '#e9b98a']; // winter, spring, summer, autumn
+  const leafStops = ['#c9d3cf', '#8fd08a', '#4c7a45', '#c97b3a'];
+  const seasonSky  = seasonLerp(yearFrac, skyStops);
+  const seasonLeaf = seasonLerp(yearFrac, leafStops);
+
+  let b = (1 - Math.cos(dayFrac*Math.PI*2)) / 2;
+  b = b*b*(3-2*b); // smoothstep, day (1) <-> night (0)
+
+  const sky = mixColor('#0a0f22', seasonSky, 0.15+0.85*b);
+  const leaf = mixColor(seasonLeaf, '#151810', (1-b)*0.45);
+
+  const monthIndex = Math.floor((((yearFrac%1)+1)%1) * 12) % 12;
+  return { sky, leaf, brightness: b, monthName: MONTH_NAMES[monthIndex] };
+}
+
+function drawCelestialBody(ctx, W, H, dayFrac, brightness){
+  const frac = ((dayFrac%1)+1)%1;
+  const x = frac * W;
+  const y = H*0.10 + (1 - Math.sin(frac*Math.PI)) * H*0.16;
+  const isDay = brightness > 0.5;
+  const r = isDay ? 46 : 30;
+  const glow = ctx.createRadialGradient(x,y,2,x,y,r);
+  glow.addColorStop(0, isDay ? 'rgba(255,240,200,0.55)' : 'rgba(200,215,255,0.4)');
+  glow.addColorStop(1, 'rgba(255,240,200,0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.fillStyle = isDay ? '#fff3d0' : '#eef1fb';
+  ctx.arc(x,y, isDay?13:10, 0, Math.PI*2); ctx.fill();
+  if (!isDay){
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(20,20,40,0.35)';
+    ctx.arc(x+4,y-2,9,0,Math.PI*2); ctx.fill();
+  }
+}
+
+function paintStars(ctx, rand, W, H, alpha){
+  for (let i=0;i<26;i++){
+    const sx=(i*97)%W, sy=(i*53)%(H*0.4);
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${alpha*(0.4+0.5*rand(i))})`;
+    ctx.arc(sx,sy,1.2,0,Math.PI*2); ctx.fill();
+  }
+}
+
+function drawMonthLabel(ctx, W, H, monthName){
+  ctx.save();
+  ctx.font = 'italic 16px "Iowan Old Style", Georgia, serif';
+  ctx.fillStyle = 'rgba(251,238,228,0.55)';
+  ctx.textAlign = 'right';
+  ctx.fillText(monthName, W-16, 26);
+  ctx.restore();
+}
+
+function renderViewerScene(ctx, W, H, params, sway, t, yearFrac, dayFrac){
+  const tl = getTimeLapse(yearFrac, dayFrac);
+  paintSky(ctx, W, H, tl.sky);
+  const rand = makeRand(params.seed);
+  if (tl.brightness < 0.5) paintStars(ctx, rand, W, H, (0.5-tl.brightness)*2);
+  drawCelestialBody(ctx, W, H, dayFrac, tl.brightness);
+
+  paintGround(ctx, W, H, rand);
+
+  const rootX = W*0.5, rootY = H*0.68;
+  const maxDepth = Math.ceil(Math.log(params.minLen/params.len)/Math.log(params.ratio)) + 2;
+  drawLeafyBranch(ctx, rand, {
+    minLen: params.minLen, ratio: params.ratio, splitAngle: params.angle,
+    bark: '#4a3226', leaf: tl.leaf, maxDepth, sway
+  }, rootX, rootY, 0, params.len, 0);
+
+  for (let i=0;i<params.lilyCount;i++){
+    const ang = (i/params.lilyCount) * Math.PI - Math.PI*0.06;
+    const rad = 130 + rand(i*2.2)*70;
+    const lx = rootX + Math.cos(ang)*rad*1.4;
+    const ly = rootY + Math.sin(ang)*24 + 26 + rand(i*3.3)*18;
+    if (Math.abs(lx-rootX) < 70 && ly > rootY-10) continue;
+    drawLily(ctx, lx, ly, 1 + rand(i)*0.6, params.lily, (rand(i*5)-0.5)*0.6);
+  }
+
+  if (tl.brightness < 0.55) paintFireflies(ctx, rand, W, H, t);
+
+  drawCouple(ctx, rootX, rootY + 6, 1.5);
+  drawMonthLabel(ctx, W, H, tl.monthName);
+}
+
+function paintFireflies(ctx, rand, W, H, t){
+  for (let i=0;i<14;i++){
+    const bx = (rand(i*4.4) * W + Math.sin(t*0.6 + i)*20) % W;
+    const by = H*0.4 + rand(i*8.8)*H*0.3 + Math.cos(t*0.5+i)*10;
+    const alpha = 0.3 + 0.4*Math.abs(Math.sin(t*1.3+i*2));
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,238,180,${alpha})`;
+    ctx.arc(bx, by, 1.8, 0, Math.PI*2);
+    ctx.fill();
+  }
+}
+
+function renderScene(ctx, W, H, params, sway, t){
+  paintSky(ctx, W, H, params.sky);
+  const rand = makeRand(params.seed);
+  paintGround(ctx, W, H, rand);
+
+  const rootX = W*0.5, rootY = H*0.68;
+  const maxDepth = Math.ceil(Math.log(params.minLen/params.len)/Math.log(params.ratio)) + 2;
+  drawLeafyBranch(ctx, rand, {
+    minLen: params.minLen, ratio: params.ratio, splitAngle: params.angle,
+    bark: '#4a3226', leaf: params.leaf, maxDepth, sway
+  }, rootX, rootY, 0, params.len, 0);
+
+  // lilies ringed around the roots
+  for (let i=0;i<params.lilyCount;i++){
+    const ang = (i/params.lilyCount) * Math.PI - Math.PI*0.06;
+    const rad = 130 + rand(i*2.2)*70;
+    const lx = rootX + Math.cos(ang)*rad*1.4;
+    const ly = rootY + Math.sin(ang)*24 + 26 + rand(i*3.3)*18;
+    if (Math.abs(lx-rootX) < 70 && ly > rootY-10) continue; // keep clear behind couple
+    drawLily(ctx, lx, ly, 1 + rand(i)*0.6, params.lily, (rand(i*5)-0.5)*0.6);
+  }
+
+  if (t !== undefined) paintFireflies(ctx, rand, W, H, t);
+
+  drawCouple(ctx, rootX, rootY + 6, 1.5);
+}
+
+/* ---------------- developer mode ---------------- */
+function initDev(){
+  const canvas = document.getElementById('devCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const ids = ['len','ang','ratio','minlen','lilyCount','skyColor','leafColor','lilyColor','nameA','nameB','annivDate','storyText'];
+  const el = {}; ids.forEach(id => el[id] = document.getElementById(id));
+  let seed = Math.random()*1000;
+
+  function params(){
+    return {
+      seed,
+      len: parseFloat(el.len.value),
+      angle: parseFloat(el.ang.value),
+      ratio: parseFloat(el.ratio.value)/100,
+      minLen: parseFloat(el.minlen.value),
+      lilyCount: parseInt(el.lilyCount.value),
+      sky: el.skyColor.value,
+      leaf: el.leafColor.value,
+      lily: el.lilyColor.value
+    };
+  }
+
+  function updateCounter(){
+    const d = daysBetween(el.annivDate.value);
+    const box = document.getElementById('devCounter');
+    box.innerHTML = d !== null
+      ? `<div class="num">${d.toLocaleString()}</div><div class="lbl">days of ${escapeHtml(el.nameA.value)} &amp; ${escapeHtml(el.nameB.value)}</div>`
+      : '';
+    document.getElementById('devStory').textContent = el.storyText.value;
+  }
+
+  function escapeHtml(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+  function refresh(){
+    document.getElementById('lenVal').textContent = el.len.value;
+    document.getElementById('angVal').textContent = el.ang.value + '°';
+    document.getElementById('ratioVal').textContent = (el.ratio.value/100).toFixed(2);
+    document.getElementById('minVal').textContent = el.minlen.value;
+    document.getElementById('lilyVal').textContent = el.lilyCount.value;
+    renderScene(ctx, W, H, params(), 0);
+    updateCounter();
+  }
+
+  ids.forEach(id => el[id].addEventListener('input', refresh));
+
+  document.getElementById('growBtn').onclick = () => { seed = Math.random()*1000; refresh(); };
+  document.getElementById('windBtn').onclick = () => renderScene(ctx, W, H, params(), (Math.random()>0.5?1:-1)*(3+Math.random()*3));
+  document.getElementById('animateBtn').onclick = () => {
+    seed = Math.random()*1000;
+    const base = params();
+    const targetDepth = Math.ceil(Math.log(base.minLen/base.len)/Math.log(base.ratio)) + 2;
+    let d = 0;
+    const step = () => {
+      paintSky(ctx, W, H, base.sky);
+      const rand = makeRand(base.seed);
+      paintGround(ctx, W, H, rand);
+      drawLeafyBranch(ctx, rand, { minLen: base.minLen, ratio: base.ratio, splitAngle: base.angle, bark:'#4a3226', leaf: base.leaf, maxDepth: d, sway:0 }, W*0.5, H*0.68, 0, base.len, 0);
+      if (d >= targetDepth-1){
+        for (let i=0;i<base.lilyCount;i++){
+          const ang = (i/base.lilyCount) * Math.PI - Math.PI*0.06;
+          const rad = 130 + rand(i*2.2)*70;
+          const lx = W*0.5 + Math.cos(ang)*rad*1.4;
+          const ly = H*0.68 + Math.sin(ang)*24 + 26 + rand(i*3.3)*18;
+          if (Math.abs(lx-W*0.5) < 70 && ly > H*0.68-10) continue;
+          drawLily(ctx, lx, ly, 1+rand(i)*0.6, base.lily, (rand(i*5)-0.5)*0.6);
+        }
+        drawCouple(ctx, W*0.5, H*0.68+6, 1.5);
+      }
+      d++;
+      if (d <= targetDepth+1) setTimeout(step, 90);
+    };
+    step();
+  };
+
+  canvas.addEventListener('click', () => { seed = Math.random()*1000; refresh(); });
+
+  refresh();
+}
+
+/* ---------------- viewer mode ---------------- */
+function initViewer(){
+  const canvas = document.getElementById('viewerCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const params = {
+    seed: Math.random()*1000,
+    len: 150, angle: 24, ratio: 0.78, minLen: 10, lilyCount: 9,
+    sky: '#f2b3c9', leaf: '#4c7a45', lily: '#fdfaf3'
+  };
+
+  document.getElementById('viewerCounter').innerHTML =
+    `<div class="lbl">two, under one tree</div>`;
+  document.getElementById('viewerStory').textContent =
+    'Every season, the same roots — just a little taller.';
+
+  // a little easter egg: tap the couple for a burst of hearts
+  const heartBursts = [];
+  const coupleX = W*0.5, coupleY = H*0.68 + 6;
+  function spawnHeartBurst(){
+    for (let i=0;i<10;i++){
+      heartBursts.push({
+        x: coupleX + (Math.random()-0.5)*40,
+        y: coupleY - 30,
+        vx: (Math.random()-0.5)*1.6,
+        vy: -1.2 - Math.random()*1.2,
+        alpha: 1,
+        scale: 0.6 + Math.random()*0.7
+      });
+    }
+  }
+  canvas.addEventListener('pointerdown', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = W/rect.width, scaleY = H/rect.height;
+    const x = (e.clientX-rect.left)*scaleX, y = (e.clientY-rect.top)*scaleY;
+    if (Math.hypot(x-coupleX, y-(coupleY-40)) < 130) spawnHeartBurst();
+  });
+
+  let start = performance.now();
+  const YEAR_DURATION = 96; // seconds for one full January-to-December cycle
+  const DAY_DURATION = 8;   // seconds for one full night-to-day cycle
+  function loop(now){
+    const t = (now-start)/1000;
+    const sway = Math.sin(t*0.4)*2.5;
+    const yearFrac = t / YEAR_DURATION;
+    const dayFrac = t / DAY_DURATION;
+    renderViewerScene(ctx, W, H, params, sway, t, yearFrac, dayFrac);
+
+    for (let i=heartBursts.length-1;i>=0;i--){
+      const h = heartBursts[i];
+      h.x += h.vx; h.y += h.vy; h.vy += 0.02; h.alpha -= 0.014;
+      if (h.alpha <= 0){ heartBursts.splice(i,1); continue; }
+      drawTinyHeart(ctx, h.x, h.y, h.scale, h.alpha);
+    }
+
+    viewerRAF = requestAnimationFrame(loop);
+  }
+  viewerRAF = requestAnimationFrame(loop);
+}
+
+/* ================= FUCHKA SCENE ================= */
+const fuchkaGames = {}; // 'dev' / 'viewer' -> game state object
+
+function switchScene(mode, scene){
+  document.querySelectorAll(`#${mode}View .sceneTab`).forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.scene === scene);
+  });
+  document.getElementById(mode + 'SceneTree').classList.toggle('hidden', scene !== 'tree');
+  document.getElementById(mode + 'SceneFuchka').classList.toggle('hidden', scene !== 'fuchka');
+  document.getElementById(mode + 'SceneJourney').classList.toggle('hidden', scene !== 'journey');
+
+  // small polish: fade the newly-active scene in rather than snapping to it
+  const activeId = scene === 'tree' ? 'SceneTree' : scene === 'fuchka' ? 'SceneFuchka' : 'SceneJourney';
+  const activeEl = document.getElementById(mode + activeId);
+  if (activeEl){
+    activeEl.classList.remove('sceneFade');
+    void activeEl.offsetWidth; // force reflow so the animation restarts
+    activeEl.classList.add('sceneFade');
+  }
+
+  if (scene === 'fuchka' && !fuchkaGames[mode]){
+    fuchkaGames[mode] = createFuchkaGame(mode);
+  }
+}
+
+function closeFuchkaModal(){
+  document.getElementById('fuchkaModal').classList.add('hidden');
+}
+
+const FUCHKA_WARNINGS = [
+  "Two down already? 🥟 Careful, love — save a little room for me!",
+  "That's a third helping — the tamarind water is winning this fight 😄",
+  "Six fuchka deep and still smiling? Impressive. Maybe some water now?",
+  "Okay, officially showing off now 😆 Keep going if you dare.",
+  "At this point the plate should be scared of you. Love that for you. 🌶️"
+];
+
+const FUCHKA_MILESTONES = {
+  10: "🎉 Ten fuchka in — that officially deserves its own trophy.",
+  15: "🏆 Fifteen?! Are you even human at this point?",
+  20: "👑 Twenty fuchka. You are now, legally, a fuchka connoisseur.",
+  25: "🥇 Twenty-five. Honestly? Respect."
+};
+
+function createFuchkaGame(mode){
+  const canvas = document.getElementById(mode + 'FuchkaCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const spiceRow = document.getElementById(mode + 'SpiceRow');
+  const counterEl = document.getElementById(mode + 'EatenCount');
+  const hintEl = spiceRow.parentElement.querySelector('.fuchkaHint');
+
+  const state = {
+    selectedSpice: 'tamarind',
+    eatenTotal: 0,
+    warnStage: 0,
+    puris: [],
+    floaters: [],
+    floaterRunning: false,
+    confetti: [],
+    confettiRunning: false
+  };
+
+  const SPICE_COLORS = {
+    tamarind: 'rgba(90,55,25,0.55)',
+    chili:    'rgba(178,32,32,0.5)',
+    onion:    'rgba(245,232,200,0.7)',
+    mint:     'rgba(90,170,110,0.5)'
+  };
+
+  function seedPlate(){
+    state.puris = [];
+    const cx = W/2, cy = H/2 + 30;
+    const count = 8;
+    for (let i=0;i<count;i++){
+      const ang = (i/count) * Math.PI * 2;
+      const rad = 175 + (Math.random()-0.5)*20;
+      state.puris.push({
+        id: i,
+        x: cx + Math.cos(ang)*rad,
+        y: cy + Math.sin(ang)*rad*0.55,
+        r: 34 + Math.random()*6,
+        state: 'plain',
+        spice: null,
+        alive: true,
+        anim: 1 // scale, animates down to 0 when eaten
+      });
+    }
+  }
+
+  function drawPlate(){
+    const cx = W/2, cy = H/2 + 30;
+    const g = ctx.createRadialGradient(cx, cy, 40, cx, cy, 300);
+    g.addColorStop(0, '#fdfaf3');
+    g.addColorStop(0.75, '#efe4d3');
+    g.addColorStop(1, '#d8c7ac');
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 300, 165, 0, 0, Math.PI*2);
+    ctx.fillStyle = g;
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+    ctx.stroke();
+
+    // a lemon wedge and mint garnish for flavor
+    ctx.save();
+    ctx.translate(cx + 250, cy - 30);
+    ctx.rotate(-0.4);
+    ctx.fillStyle = '#f4d35e';
+    ctx.beginPath(); ctx.arc(0,0,20,0.2,Math.PI-0.2); ctx.fill();
+    ctx.strokeStyle = '#e0b83a'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawPuri(p){
+    if (!p.alive) return;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.scale(p.anim, p.anim);
+
+    // shell
+    const shellGrad = ctx.createRadialGradient(-6,-6,4,0,0,p.r);
+    shellGrad.addColorStop(0, '#f0c675');
+    shellGrad.addColorStop(1, '#c98a3a');
+    ctx.beginPath();
+    ctx.arc(0,0,p.r,0,Math.PI*2);
+    ctx.fillStyle = shellGrad;
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(90,55,20,0.4)';
+    ctx.stroke();
+
+    // crater / filling
+    ctx.beginPath();
+    ctx.arc(0,-p.r*0.12,p.r*0.62,0,Math.PI*2);
+    ctx.fillStyle = '#f3e0ad';
+    ctx.fill();
+
+    // chickpea + potato flecks
+    for (let i=0;i<5;i++){
+      const a = (i/5)*Math.PI*2 + p.id;
+      const rr = p.r*0.32;
+      ctx.beginPath();
+      ctx.arc(Math.cos(a)*rr, -p.r*0.12 + Math.sin(a)*rr*0.6, 2.4, 0, Math.PI*2);
+      ctx.fillStyle = '#dba33f';
+      ctx.fill();
+    }
+    // coriander flecks
+    ctx.fillStyle = '#3f7a3f';
+    for (let i=0;i<3;i++){
+      const a = i*2.1 + p.id;
+      ctx.beginPath();
+      ctx.arc(Math.cos(a)*p.r*0.4, -p.r*0.12+Math.sin(a)*p.r*0.25, 1.6, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    // spice overlay
+    if (p.state === 'spiced'){
+      ctx.beginPath();
+      ctx.arc(0,-p.r*0.12,p.r*0.66,0,Math.PI*2);
+      ctx.fillStyle = SPICE_COLORS[p.spice] || SPICE_COLORS.tamarind;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(-p.r*0.2,-p.r*0.3,p.r*0.14,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  function render(){
+    ctx.clearRect(0,0,W,H);
+    drawPlate();
+    state.puris.forEach(drawPuri);
+    state.confetti.forEach(c => {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0,c.alpha);
+      ctx.translate(c.x,c.y); ctx.rotate(c.rot);
+      ctx.fillStyle = c.color; ctx.fillRect(-4,-6,8,12);
+      ctx.restore();
+    });
+    state.floaters.forEach(f => {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0,f.alpha);
+      ctx.font = f.text.length > 3 ? 'italic 15px "Iowan Old Style", Georgia, serif' : '28px sans-serif';
+      ctx.fillStyle = f.text.length > 3 ? '#fbeee4' : '#000';
+      ctx.textAlign = 'center';
+      ctx.fillText(f.text, f.x, f.y);
+      ctx.restore();
+    });
+  }
+
+  function spawnReaction(x,y){
+    const emojis = ['😋','🤤','🔥','😍','👌'];
+    state.floaters.push({ x, y, text: emojis[Math.floor(Math.random()*emojis.length)], alpha: 1, vy: -0.7 });
+    if (!state.floaterRunning){
+      state.floaterRunning = true;
+      const step = () => {
+        state.floaters.forEach(f => { f.y += f.vy; f.alpha -= 0.02; });
+        state.floaters = state.floaters.filter(f => f.alpha > 0);
+        render();
+        if (state.floaters.length > 0) requestAnimationFrame(step);
+        else state.floaterRunning = false;
+      };
+      requestAnimationFrame(step);
+    }
+  }
+
+  function burstConfetti(){
+    const cx = W/2, cy = H/2;
+    const colors = ['#e79bb0','#f4d35e','#8fbf7f','#7fb3d5','#c98adf'];
+    for (let i=0;i<24;i++){
+      state.confetti.push({
+        x: cx, y: cy,
+        vx: (Math.random()-0.5)*8, vy: -4-Math.random()*4,
+        color: colors[i%colors.length], rot: Math.random()*Math.PI*2, alpha: 1
+      });
+    }
+    if (!state.confettiRunning){
+      state.confettiRunning = true;
+      const step = () => {
+        state.confetti.forEach(c => { c.x+=c.vx; c.y+=c.vy; c.vy+=0.3; c.alpha-=0.015; c.rot+=0.2; });
+        state.confetti = state.confetti.filter(c => c.alpha > 0);
+        render();
+        if (state.confetti.length > 0) requestAnimationFrame(step);
+        else state.confettiRunning = false;
+      };
+      requestAnimationFrame(step);
+    }
+  }
+
+  function animateEat(p){
+    const step = () => {
+      p.anim -= 0.28;
+      if (p.anim <= 0){
+        p.anim = 0; p.alive = false;
+        render();
+        if (state.puris.every(pp => !pp.alive)){
+          setTimeout(() => {
+            seedPlate(); render();
+            state.floaters.push({ x: W/2, y: H/2 - 40, text: 'Fresh batch! 🍽️', alpha: 1, vy: -0.4 });
+            if (!state.floaterRunning){
+              state.floaterRunning = true;
+              const step = () => {
+                state.floaters.forEach(f => { f.y += f.vy; f.alpha -= 0.012; });
+                state.floaters = state.floaters.filter(f => f.alpha > 0);
+                render();
+                if (state.floaters.length > 0) requestAnimationFrame(step);
+                else state.floaterRunning = false;
+              };
+              requestAnimationFrame(step);
+            }
+          }, 700);
+        }
+      } else {
+        render();
+        requestAnimationFrame(step);
+      }
+    };
+    step();
+  }
+
+  function maybeWarn(){
+    if (state.eatenTotal > 0 && FUCHKA_MILESTONES[state.eatenTotal]){
+      document.getElementById('fuchkaModalMsg').textContent = FUCHKA_MILESTONES[state.eatenTotal];
+      document.getElementById('fuchkaModal').classList.remove('hidden');
+      burstConfetti();
+      return;
+    }
+    if (state.eatenTotal > 0 && state.eatenTotal % 3 === 0){
+      const msg = FUCHKA_WARNINGS[Math.min(state.warnStage, FUCHKA_WARNINGS.length-1)];
+      state.warnStage++;
+      document.getElementById('fuchkaModalMsg').textContent = msg;
+      document.getElementById('fuchkaModal').classList.remove('hidden');
+    }
+  }
+
+  let lastTapTime = 0;
+  function handleTap(clientX, clientY){
+    // ignore a stray duplicate event fired within 250ms of a handled one
+    // (some browsers fire both pointerdown and click for the same tap)
+    const now = performance.now();
+    if (now - lastTapTime < 250) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = W / rect.width, scaleY = H / rect.height;
+    const x = (clientX - rect.left) * scaleX;
+    const y = (clientY - rect.top) * scaleY;
+
+    // generous hit radius (1.4x the visual size) so a slightly-off tap still lands
+    const hit = state.puris.find(p => p.alive && Math.hypot(p.x-x, p.y-y) < p.r * 1.4);
+    if (!hit) return;
+
+    lastTapTime = now;
+
+    // first tap on a plain fuchka: spice it and stop there so you can see it
+    if (hit.state === 'plain'){
+      hit.state = 'spiced';
+      hit.spice = state.selectedSpice;
+      render();
+      return;
+    }
+
+    // second tap, on an already-spiced fuchka: eat it
+    state.eatenTotal++;
+    counterEl.textContent = state.eatenTotal;
+    spawnReaction(hit.x, hit.y - hit.r);
+    animateEat(hit);
+    maybeWarn();
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    handleTap(e.clientX, e.clientY);
+  });
+  // fallback for browsers/environments without pointer events
+  canvas.addEventListener('click', (e) => handleTap(e.clientX, e.clientY));
+
+  spiceRow.querySelectorAll('.spiceBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      spiceRow.querySelectorAll('.spiceBtn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.selectedSpice = btn.dataset.spice;
+    });
+  });
+  spiceRow.querySelector('.spiceBtn').classList.add('selected');
+
+  seedPlate();
+  render();
+  return state;
+}
+
+/* ================= JOURNEY / LOVE TRAIL SCENE ================= */
+const JOURNEY_MONTHS = [
+  { key: 'jan', label: 'January',  caption: 'Where it all began — the first spark.' },
+  { key: 'feb', label: 'February', caption: 'Two beds, two buildings, one phone conversation.', sky: '#f2b3c9' },
+  { key: 'mar', label: 'March',    caption: 'A rickshaw ride, and a kiss on the cheek.', sky: '#d7e3b0' },
+  { key: 'apr', label: 'April',    caption: 'A tall booth, a quiet restaurant, and no space left between us.', sky: '#bfe0e0' },
+  { key: 'may', label: 'May',      caption: 'A hard stretch — the same bench, but further apart than usual.', sky: '#f7d9a0' },
+  { key: 'jun', label: 'June',     caption: 'Better again — up too late, texting, smiling at nothing.', sky: '#a9d6d9' },
+  { key: 'jul', label: 'July',     caption: 'Board exams by day, apart in different halls — the same call at night, like always.', sky: '#e9c3dd' },
+  { key: 'aug', label: 'August',   caption: 'Dinner out, holding on tight, and one very small "Chu."', sky: '#e3cf9e' },
+  { key: 'sep', label: 'September',caption: '8 months today — balloons, cake, and no reason to stop smiling.', sky: '#c3d3ef' }
+];
+
+function toggleNode(dotEl){
+  const node = dotEl.closest('.journeyNode');
+  if (node.classList.contains('comingSoon')) return; // always open, nothing to toggle
+  node.classList.toggle('open');
+  node.classList.add('visited'); // small badge marking a stop you've already opened
+}
+
+function buildJourney(mode){
+  const container = document.getElementById(mode + 'JourneyPath');
+  if (!container) return;
+  let html = '';
+
+  JOURNEY_MONTHS.forEach(m => {
+    const captionField = mode === 'dev'
+      ? `<textarea>${m.caption}</textarea>`
+      : `<p style="margin:0;">${m.caption}</p>`;
+    const detailInner = m.key === 'jan'
+      ? `<div class="miniStage"><canvas id="${mode}JanCanvas" width="900" height="460"></canvas></div>${captionField}`
+      : `<div class="miniStage"><canvas id="${mode}MonthCanvas_${m.key}" width="900" height="460"></canvas></div>${captionField}`;
+    html += `
+      <div class="journeyNode" data-month="${m.key}">
+        <button class="nodeDot" onclick="toggleNode(this)" aria-label="${m.label}">${m.label.slice(0,3)}</button>
+        <div class="nodeLabel">${m.label}</div>
+        <div class="nodeDetail">${detailInner}</div>
+      </div>`;
+  });
+
+  html += `
+    <div class="journeyNode comingSoon" data-month="comingSoon">
+      <button class="nodeDot" onclick="toggleNode(this)" aria-label="Coming soon">?</button>
+      <div class="nodeLabel">Coming soon</div>
+      <div class="nodeDetail">
+        <div class="journeyTimer" id="${mode}JourneyTimer">—</div>
+        <div class="journeyTimerLbl">and counting, since Jan 13, 2026</div>
+      </div>
+    </div>`;
+
+  const dreamCaption = mode === 'dev'
+    ? `<textarea>Just a dream — for now.</textarea>`
+    : `<p style="margin:0;">Just a dream — for now.</p>`;
+  html += `
+    <div class="journeyNode dreamNode" data-month="dream">
+      <button class="nodeDot" onclick="toggleNode(this)" aria-label="A Dream">✧</button>
+      <div class="nodeLabel">A Dream</div>
+      <div class="nodeDetail">
+        <div class="miniStage"><canvas id="${mode}DreamCanvas" width="900" height="460" class="dreamy"></canvas></div>
+        <div class="dreamCaption">a dream</div>
+        ${dreamCaption}
+      </div>
+    </div>`;
+
+  container.innerHTML = html;
+}
+
+function startJourneyTimer(){
+  const startDate = new Date(2026, 0, 13, 0, 0, 0); // January 13, 2026
+  function tick(){
+    const diff = Math.max(0, Date.now() - startDate.getTime());
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    const text = `${days}d ${String(hours).padStart(2,'0')}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+    const devEl = document.getElementById('devJourneyTimer');
+    const viewerEl = document.getElementById('viewerJourneyTimer');
+    if (devEl) devEl.textContent = text;
+    if (viewerEl) viewerEl.textContent = text;
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
+// same seated-couple illustration used under the big tree, reused as a small
+// backdrop scene for every month that doesn't have its own custom scene
+function drawMonthCoupleScene(ctx, W, H, t, skyColor, rand){
+  paintSky(ctx, W, H, skyColor);
+  paintGround(ctx, W, H, rand);
+  paintFireflies(ctx, rand, W, H, t);
+  drawCouple(ctx, W/2, H*0.86, 1.55);
+}
+
+/* ---------------- FEBRUARY: separate beds, separate buildings, texting ---------------- */
+function drawFebruaryScene(ctx, W, H, t){
+  const sky = ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'#0a0f22'); sky.addColorStop(1,'#161c34');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H);
+  for (let i=0;i<26;i++){
+    const sx=(i*113)%W, sy=(i*67)%(H*0.35);
+    const tw=0.4+0.5*Math.abs(Math.sin(t*1.2+i));
+    ctx.beginPath(); ctx.fillStyle=`rgba(255,255,255,${tw*0.6})`; ctx.arc(sx,sy,1.1,0,Math.PI*2); ctx.fill();
+  }
+
+  const gap = W*0.10;
+  const roomW = (W-gap)/2;
+
+  function room(x0, blanketColor, isGirl, phoneOnRight){
+    // building wall
+    ctx.fillStyle = '#221a2c';
+    ctx.fillRect(x0, H*0.12, roomW, H*0.7);
+    // window showing the night outside
+    const winW = roomW*0.32, winX = x0 + roomW*0.12, winY = H*0.16;
+    ctx.fillStyle = '#0a0f22';
+    roundedRectPath(ctx, winX, winY, winW, winW*1.1, 6); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.15)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(winX+winW/2,winY); ctx.lineTo(winX+winW/2,winY+winW*1.1); ctx.stroke();
+
+    // bed
+    const bedX = x0+roomW*0.10, bedY = H*0.58, bedW = roomW*0.8, bedH = H*0.16;
+    ctx.fillStyle = '#3a2f28';
+    roundedRectPath(ctx, bedX, bedY+bedH*0.7, bedW, bedH*0.35, 6); ctx.fill(); // bed frame
+    ctx.fillStyle = blanketColor;
+    roundedRectPath(ctx, bedX, bedY, bedW, bedH*0.75, 14); ctx.fill(); // blanket
+    // pillow
+    ctx.fillStyle = '#f3ece0';
+    roundedRectPath(ctx, bedX+bedW*0.06, bedY-10, bedW*0.32, 22, 10); ctx.fill();
+
+    // sleeping head peeking above the blanket
+    const headX = bedX+bedW*0.22, headY = bedY-2;
+    ctx.fillStyle = '#e7b98f';
+    ctx.beginPath(); ctx.ellipse(headX, headY, 15,13,0,0,Math.PI*2); ctx.fill();
+    if (isGirl){
+      ctx.fillStyle = '#7a4f63';
+      ctx.beginPath();
+      ctx.moveTo(headX-16,headY-2); ctx.quadraticCurveTo(headX-18,headY-22,headX,headY-24);
+      ctx.quadraticCurveTo(headX+18,headY-22,headX+16,headY-2);
+      ctx.quadraticCurveTo(headX,headY+8,headX-16,headY-2);
+      ctx.fill();
+    } else {
+      ctx.fillStyle = '#2a1e18';
+      ctx.beginPath();
+      ctx.moveTo(headX-14,headY-4); ctx.quadraticCurveTo(headX-15,headY-20,headX,headY-20);
+      ctx.quadraticCurveTo(headX+13,headY-20,headX+11,headY-8);
+      ctx.quadraticCurveTo(headX,headY-14,headX-8,headY-10);
+      ctx.fill();
+    }
+    // closed eyes
+    ctx.strokeStyle = '#4a3226'; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(headX-6,headY+1); ctx.lineTo(headX-2,headY+1); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(headX+2,headY+1); ctx.lineTo(headX+6,headY+1); ctx.stroke();
+
+    // glowing phone by the pillow
+    const phX = phoneOnRight ? bedX+bedW*0.62 : bedX+bedW*0.46;
+    const glow = ctx.createRadialGradient(phX,bedY-14,2,phX,bedY-14,26);
+    glow.addColorStop(0,`rgba(180,210,255,${0.5+0.15*Math.sin(t*3)})`);
+    glow.addColorStop(1,'rgba(180,210,255,0)');
+    ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(phX,bedY-14,26,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#dfeeff';
+    roundedRectPath(ctx, phX-6, bedY-24, 12, 20, 3); ctx.fill();
+  }
+
+  room(0, '#3a4a63', false, true);       // boy's room, left
+  room(W-roomW, '#6a4a63', true, false); // girl's room, right
+
+  // divider between the two separate buildings
+  ctx.fillStyle = '#0a0f22';
+  ctx.fillRect(roomW, 0, gap, H);
+
+  // the two of them texting across the gap — her questions, his replies
+  drawChatBubble(ctx, W*0.5, H*0.21, 'Will you be my valentine?', 210, 'right');
+  drawChatBubble(ctx, W*0.5, H*0.31, 'yes', 90, 'left');
+  drawChatBubble(ctx, W*0.5, H*0.45, "tui to amare valentines er wish o koros nai 😒", 230, 'right');
+  drawChatBubble(ctx, W*0.5, H*0.60, 'ere bedi ami life a kori nai kokhono Tae mistake', 260, 'left');
+}
+
+/* ---------------- MARCH: auto-rickshaw, a kiss on the cheek ---------------- */
+function drawMarchScene(ctx, W, H, t){
+  const sky = ctx.createLinearGradient(0,0,0,H*0.7);
+  sky.addColorStop(0,'#3a2f52'); sky.addColorStop(1,'#e79a6b');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H*0.7);
+
+  // distant building silhouettes
+  ctx.fillStyle = 'rgba(30,20,30,0.6)';
+  for (let i=0;i<6;i++){
+    const bw = 70+((i*37)%50), bx=i*(W/6), bh=60+((i*53)%90);
+    ctx.fillRect(bx, H*0.55-bh, bw, bh);
+  }
+
+  // road
+  const roadY = H*0.62;
+  ctx.fillStyle = '#2b2b30';
+  ctx.fillRect(0, roadY, W, H-roadY);
+  ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 4;
+  ctx.setLineDash([28,22]);
+  const dashShift = (t*90) % 50;
+  ctx.beginPath(); ctx.moveTo(-50+dashShift, roadY+ (H-roadY)/2); ctx.lineTo(W, roadY+(H-roadY)/2); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // motion streaks
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)'; ctx.lineWidth = 2;
+  for (let i=0;i<5;i++){
+    const ly = H*0.4 + i*14;
+    ctx.beginPath(); ctx.moveTo(0,ly); ctx.lineTo(60,ly); ctx.stroke();
+  }
+
+  const cx = W*0.5, groundY = roadY+ (H-roadY)*0.7;
+
+  ctx.save();
+  ctx.translate(cx, groundY);
+
+  // wheels
+  ctx.fillStyle = '#111';
+  ctx.beginPath(); ctx.arc(-90,26,20,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(70,26,20,0,Math.PI*2); ctx.fill();
+
+  // rickshaw body
+  ctx.fillStyle = '#e0b23a';
+  roundedRectPath(ctx, -110, -60, 220, 80, 18); ctx.fill();
+  // canopy roof
+  ctx.fillStyle = '#2f8f5a';
+  ctx.beginPath();
+  ctx.moveTo(-118,-58);
+  ctx.quadraticCurveTo(-100,-108, 0,-112);
+  ctx.quadraticCurveTo(100,-108, 118,-58);
+  ctx.quadraticCurveTo(0,-78,-118,-58);
+  ctx.closePath(); ctx.fill();
+  // open side / seat interior
+  ctx.fillStyle = '#3c2a1c';
+  roundedRectPath(ctx, -96, -46, 192, 60, 10); ctx.fill();
+
+  // seated figures — boy (green jacket) and girl (hijab), close together
+  // boy
+  ctx.save(); ctx.translate(-36,-4);
+  ctx.fillStyle = '#2f6b3f';
+  ctx.beginPath();
+  ctx.moveTo(-16,10); ctx.quadraticCurveTo(-20,-26,0,-30);
+  ctx.quadraticCurveTo(20,-26,16,10); ctx.quadraticCurveTo(0,16,-16,10); ctx.fill();
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(2,-38,12,13,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#2a1e18';
+  ctx.beginPath();
+  ctx.moveTo(-9,-40); ctx.quadraticCurveTo(-10,-54,3,-54);
+  ctx.quadraticCurveTo(15,-54,13,-42); ctx.quadraticCurveTo(3,-48,-5,-44);
+  ctx.fill();
+  ctx.restore();
+
+  // girl leaning in toward his cheek
+  ctx.save(); ctx.translate(20,-6);
+  ctx.fillStyle = '#5a3f52';
+  ctx.beginPath();
+  ctx.moveTo(-14,10); ctx.quadraticCurveTo(-18,-24,2,-28);
+  ctx.quadraticCurveTo(20,-24,15,10); ctx.quadraticCurveTo(0,16,-14,10); ctx.fill();
+  // hijab + face, tilted toward the boy
+  ctx.save();
+  ctx.translate(-14,-36);
+  ctx.rotate(-0.5);
+  ctx.fillStyle = '#7a4f63';
+  ctx.beginPath();
+  ctx.moveTo(-13,-4); ctx.quadraticCurveTo(-17,-24,0,-27);
+  ctx.quadraticCurveTo(17,-24,13,-4); ctx.quadraticCurveTo(13,10,18,20);
+  ctx.quadraticCurveTo(4,10,4,-6); ctx.quadraticCurveTo(0,-14,-6,-8);
+  ctx.quadraticCurveTo(-10,-2,-13,-4); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#e9c1a0';
+  ctx.beginPath(); ctx.ellipse(0,-6,11,12,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+  ctx.restore();
+
+  // little heart marking the kiss
+  drawTinyHeart(ctx, -14, -44, 0.9+0.06*Math.sin(t*3), 0.9);
+
+  ctx.restore();
+}
+
+/* ---------------- APRIL: restaurant booth, cuddling, a kiss ---------------- */
+function drawAprilScene(ctx, W, H, t){
+  const bg = ctx.createRadialGradient(W/2,H*0.25,30,W/2,H*0.6,W*0.7);
+  bg.addColorStop(0,'#3a2530'); bg.addColorStop(1,'#160f14');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+  // floor
+  ctx.fillStyle = '#241a18';
+  ctx.fillRect(0, H*0.82, W, H*0.18);
+
+  // hanging pendant lamp
+  const lampX = W*0.5, lampY = H*0.10;
+  ctx.strokeStyle = '#2a1e1c'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(lampX,0); ctx.lineTo(lampX,lampY); ctx.stroke();
+  const lampGlow = ctx.createRadialGradient(lampX,lampY+18,4,lampX,lampY+18,W*0.24);
+  const flick = 0.4+0.05*Math.sin(t*2.4);
+  lampGlow.addColorStop(0,`rgba(255,214,150,${flick+0.2})`);
+  lampGlow.addColorStop(1,'rgba(255,214,150,0)');
+  ctx.fillStyle = lampGlow; ctx.beginPath(); ctx.arc(lampX,lampY+18,W*0.24,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#241a18';
+  ctx.beginPath(); ctx.moveTo(lampX-16,lampY); ctx.lineTo(lampX+16,lampY); ctx.lineTo(lampX+8,lampY+16); ctx.lineTo(lampX-8,lampY+16); ctx.closePath(); ctx.fill();
+
+  // tall booth sofa backs framing the couple
+  ctx.fillStyle = '#5a1f2c';
+  roundedRectPath(ctx, W*0.12, H*0.20, W*0.16, H*0.62, 26); ctx.fill();
+  roundedRectPath(ctx, W*0.72, H*0.20, W*0.16, H*0.62, 26); ctx.fill();
+  // subtle tufted buttons
+  ctx.fillStyle = 'rgba(0,0,0,0.25)';
+  for (let row=0; row<4; row++){
+    for (let side=0; side<2; side++){
+      const bxx = side===0 ? W*0.20 : W*0.80;
+      const byy = H*0.30 + row*H*0.10;
+      ctx.beginPath(); ctx.arc(bxx,byy,3,0,Math.PI*2); ctx.fill();
+    }
+  }
+
+  // small table with a candle
+  const tX = W*0.5, tY = H*0.72;
+  ctx.fillStyle = '#2a1c16';
+  roundedRectPath(ctx, tX-70, tY, 140, 14, 6); ctx.fill();
+  ctx.fillStyle = '#f4d35e';
+  ctx.fillRect(tX-2, tY-18, 4, 18);
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(255,200,90,${0.8+0.15*Math.sin(t*6)})`;
+  ctx.ellipse(tX, tY-22, 3, 6, 0, 0, Math.PI*2); ctx.fill();
+
+  const cx = W*0.5, groundY = H*0.66;
+
+  // boy — black t-shirt, ash pants
+  ctx.save(); ctx.translate(cx-20, groundY);
+  ctx.fillStyle = '#3a3a3a'; // ash pants
+  ctx.beginPath(); ctx.ellipse(4,6,26,12,0.1,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#161616'; // black tshirt
+  ctx.beginPath();
+  ctx.moveTo(-20,-2); ctx.quadraticCurveTo(-24,-42,0,-46);
+  ctx.quadraticCurveTo(22,-42,18,-2); ctx.quadraticCurveTo(0,8,-20,-2); ctx.fill();
+  // arm wrapped around her
+  ctx.beginPath();
+  ctx.moveTo(14,-26); ctx.quadraticCurveTo(38,-20,34,4);
+  ctx.quadraticCurveTo(28,12,18,6); ctx.quadraticCurveTo(26,-14,10,-28);
+  ctx.fill();
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(-2,-52,12,13,-0.12,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#2a1e18';
+  ctx.beginPath();
+  ctx.moveTo(-14,-54); ctx.quadraticCurveTo(-15,-68,0,-68);
+  ctx.quadraticCurveTo(12,-68,10,-56); ctx.quadraticCurveTo(0,-62,-8,-58);
+  ctx.fill();
+  ctx.restore();
+
+  // girl — white dress, head leaning in to meet his
+  ctx.save(); ctx.translate(cx+22, groundY+2);
+  ctx.fillStyle = '#c9748f';
+  ctx.beginPath(); ctx.ellipse(-4,7,22,10,-0.1,0,Math.PI*2); ctx.fill(); // legs hint
+  ctx.fillStyle = '#f3ece0'; // white dress
+  ctx.beginPath();
+  ctx.moveTo(-18,2); ctx.quadraticCurveTo(-20,-36,0,-40);
+  ctx.quadraticCurveTo(18,-36,16,2); ctx.quadraticCurveTo(0,10,-18,2); ctx.fill();
+  ctx.save();
+  ctx.translate(-16,-40);
+  ctx.rotate(-0.3);
+  ctx.fillStyle = '#7a4f63';
+  ctx.beginPath();
+  ctx.moveTo(-12,-2); ctx.quadraticCurveTo(-16,-22,0,-25);
+  ctx.quadraticCurveTo(16,-22,12,-2); ctx.quadraticCurveTo(12,10,16,20);
+  ctx.quadraticCurveTo(2,10,2,-4); ctx.quadraticCurveTo(0,-12,-6,-6);
+  ctx.quadraticCurveTo(-10,0,-12,-2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#e9c1a0';
+  ctx.beginPath(); ctx.ellipse(0,-4,11,12,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+  ctx.restore();
+
+  drawTinyHeart(ctx, cx, groundY-96, 1+0.08*Math.sin(t*3), 0.95);
+}
+
+/* ---------------- MAY: a difficult stretch, sitting apart ---------------- */
+function drawMayScene(ctx, W, H, t){
+  const sky = ctx.createLinearGradient(0,0,0,H*0.7);
+  sky.addColorStop(0,'#3a4048'); sky.addColorStop(1,'#5c6670');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H*0.7);
+
+  // rain
+  ctx.strokeStyle = 'rgba(210,220,230,0.35)'; ctx.lineWidth = 1.5;
+  for (let i=0;i<70;i++){
+    const rx = (i*47 + t*160) % W;
+    const ry = (i*83 + t*260) % (H*0.75);
+    ctx.beginPath(); ctx.moveTo(rx,ry); ctx.lineTo(rx-6,ry+16); ctx.stroke();
+  }
+
+  const groundY = H*0.72;
+  const groundGrad = ctx.createLinearGradient(0,groundY,0,H);
+  groundGrad.addColorStop(0,'#33383d'); groundGrad.addColorStop(1,'#1c1f22');
+  ctx.fillStyle = groundGrad; ctx.fillRect(0,groundY,W,H-groundY);
+
+  const benchY = groundY-6;
+  ctx.fillStyle = '#2a2f33';
+  ctx.fillRect(W*0.18,benchY,W*0.64,10);
+  ctx.fillRect(W*0.20,benchY+10,8,26);
+  ctx.fillRect(W*0.78,benchY+10,8,26);
+
+  function umbrella(x,cy,color){
+    ctx.save(); ctx.translate(x,cy);
+    ctx.strokeStyle = '#20242a'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,26); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-28,0);
+    ctx.quadraticCurveTo(-14,-16,0,0);
+    ctx.quadraticCurveTo(14,-16,28,0);
+    ctx.quadraticCurveTo(0,-8,-28,0);
+    ctx.closePath();
+    ctx.fillStyle = color; ctx.fill();
+    ctx.restore();
+  }
+
+  // boy, muted colors, sitting hunched at one end
+  const boyX = W*0.30;
+  ctx.save(); ctx.translate(boyX,benchY);
+  ctx.fillStyle = '#374a3c';
+  ctx.beginPath();
+  ctx.moveTo(-14,-4); ctx.quadraticCurveTo(-18,-38,2,-42);
+  ctx.quadraticCurveTo(18,-38,14,-2); ctx.quadraticCurveTo(0,6,-14,-4); ctx.fill();
+  ctx.fillStyle = '#2f3c33';
+  ctx.beginPath(); ctx.ellipse(0,-8,14,6,0,0,Math.PI*2); ctx.fill(); // hands in lap
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(-2,-48,11,12,0.18,0,Math.PI*2); ctx.fill(); // head tilted down
+  ctx.fillStyle = '#2a1e18';
+  ctx.beginPath();
+  ctx.moveTo(-13,-50); ctx.quadraticCurveTo(-14,-62,0,-62);
+  ctx.quadraticCurveTo(11,-62,9,-52); ctx.quadraticCurveTo(0,-56,-8,-54); ctx.fill();
+  ctx.restore();
+  umbrella(boyX, benchY-70, '#2f3f38');
+
+  // girl, muted colors, sitting hunched at the other end, a clear gap between them
+  const girlX = W*0.68;
+  ctx.save(); ctx.translate(girlX,benchY);
+  ctx.fillStyle = '#4a3f4c';
+  ctx.beginPath();
+  ctx.moveTo(-14,-2); ctx.quadraticCurveTo(-17,-34,0,-38);
+  ctx.quadraticCurveTo(17,-34,14,-2); ctx.quadraticCurveTo(0,6,-14,-2); ctx.fill();
+  ctx.fillStyle = '#3c3340';
+  ctx.beginPath(); ctx.ellipse(0,-6,13,6,0,0,Math.PI*2); ctx.fill();
+  ctx.save(); ctx.translate(2,-44); ctx.rotate(0.15);
+  ctx.fillStyle = '#4f3f52';
+  ctx.beginPath();
+  ctx.moveTo(-12,-2); ctx.quadraticCurveTo(-15,-20,0,-23);
+  ctx.quadraticCurveTo(15,-20,12,-2); ctx.quadraticCurveTo(12,10,15,18);
+  ctx.quadraticCurveTo(2,10,2,-4); ctx.quadraticCurveTo(0,-10,-6,-6);
+  ctx.quadraticCurveTo(-10,0,-12,-2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#c99f7c';
+  ctx.beginPath(); ctx.ellipse(0,-4,10,11,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+  ctx.restore();
+  umbrella(girlX, benchY-70, '#3f3542');
+}
+
+/* ---------------- JUNE: happy late-night texting, a clock at 1:15am ---------------- */
+function drawJuneScene(ctx, W, H, t){
+  const sky = ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'#141a33'); sky.addColorStop(1,'#241a30');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H);
+  for (let i=0;i<30;i++){
+    const sx=(i*101)%W, sy=(i*59)%(H*0.4);
+    const tw=0.4+0.5*Math.abs(Math.sin(t*1.3+i));
+    ctx.beginPath(); ctx.fillStyle=`rgba(255,240,210,${tw*0.7})`; ctx.arc(sx,sy,1.2,0,Math.PI*2); ctx.fill();
+  }
+
+  const gap = W*0.10, roomW = (W-gap)/2;
+
+  function cozyNook(x0, blanket, isGirl){
+    ctx.fillStyle = '#2a2036';
+    ctx.fillRect(x0, H*0.14, roomW, H*0.68);
+    const winW = roomW*0.3, winX = x0+roomW*0.12, winY = H*0.18;
+    ctx.fillStyle = '#1c1430';
+    roundedRectPath(ctx, winX, winY, winW, winW*1.05, 6); ctx.fill();
+
+    const bedX = x0+roomW*0.10, bedY = H*0.68, bedW = roomW*0.8, bedH = H*0.14;
+    ctx.fillStyle = '#3a2f28';
+    roundedRectPath(ctx, bedX, bedY+bedH*0.7, bedW, bedH*0.35, 6); ctx.fill();
+    ctx.fillStyle = blanket;
+    roundedRectPath(ctx, bedX, bedY, bedW, bedH*0.75, 14); ctx.fill();
+    ctx.fillStyle = '#f3ece0';
+    roundedRectPath(ctx, bedX+bedW*0.06, bedY-10, bedW*0.32, 22, 10); ctx.fill();
+
+    const headX = bedX+bedW*0.22, headY = bedY-6;
+    ctx.fillStyle = '#e7b98f';
+    ctx.beginPath(); ctx.ellipse(headX,headY,15,13,0,0,Math.PI*2); ctx.fill();
+    if (isGirl){
+      ctx.fillStyle = '#7a4f63';
+      ctx.beginPath();
+      ctx.moveTo(headX-16,headY-2); ctx.quadraticCurveTo(headX-18,headY-22,headX,headY-24);
+      ctx.quadraticCurveTo(headX+18,headY-22,headX+16,headY-2);
+      ctx.quadraticCurveTo(headX,headY+10,headX-16,headY-2); ctx.fill();
+    } else {
+      ctx.fillStyle = '#2a1e18';
+      ctx.beginPath();
+      ctx.moveTo(headX-14,headY-4); ctx.quadraticCurveTo(headX-15,headY-20,headX,headY-20);
+      ctx.quadraticCurveTo(headX+13,headY-20,headX+11,headY-8);
+      ctx.quadraticCurveTo(headX,headY-14,headX-8,headY-10); ctx.fill();
+    }
+    // awake, smiling
+    ctx.strokeStyle = '#4a3226'; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.arc(headX-5,headY,2,Math.PI,0); ctx.stroke();
+    ctx.beginPath(); ctx.arc(headX+5,headY,2,Math.PI,0); ctx.stroke();
+    ctx.beginPath(); ctx.arc(headX,headY+6,4,0.2,Math.PI-0.2); ctx.stroke();
+
+    const phX = bedX+bedW*0.55;
+    const glow = ctx.createRadialGradient(phX,bedY-16,2,phX,bedY-16,30);
+    glow.addColorStop(0,`rgba(255,230,180,${0.55+0.15*Math.sin(t*3)})`);
+    glow.addColorStop(1,'rgba(255,230,180,0)');
+    ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(phX,bedY-16,30,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#fff6e0';
+    roundedRectPath(ctx, phX-6, bedY-26, 12, 20, 3); ctx.fill();
+
+    for (let i=0;i<3;i++){
+      drawTinyHeart(ctx, x0+roomW*0.5+Math.sin(t+i)*14, winY+winW*0.5-20-i*14, 0.5, 0.5+0.3*Math.sin(t*2+i));
+    }
+  }
+
+  cozyNook(0, '#3a5a63', false);
+  cozyNook(W-roomW, '#8a4a63', true);
+  ctx.fillStyle = '#1c1430'; ctx.fillRect(roomW, 0, gap, H);
+
+  // a small clock, up in the gap between the two rooms
+  drawClock(ctx, W*0.5, H*0.10, 24, 1, 15);
+  ctx.fillStyle = '#f3ece0';
+  ctx.font = '12px Helvetica, Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('1:15 AM', W*0.5, H*0.10+42);
+  ctx.textAlign = 'left';
+
+  // the conversation — exam nerves, and a bit of teasing
+  drawChatBubble(ctx, W*0.5, H*0.30, 'dekh exam koto kache amader ki hobe', 220, 'right');
+  drawChatBubble(ctx, W*0.5, H*0.52, 'tension nis na exam ta Allah allah kore dile e bachi amra r tui besi kori khas ni pore matha ghurai porbi to beddoop bedi', 300, 'left');
+  drawChatBubble(ctx, W*0.5, H*0.65, 'hoise hoise natok akta, namaj porsos?', 230, 'right');
+}
+
+/* ---------------- JULY: two panels — board exam by day, a call at night ---------------- */
+function drawExamRoom(ctx, x0, y0, w, h, isGirl){
+  ctx.fillStyle = '#cfe0ea';
+  ctx.fillRect(x0, y0, w, h);
+
+  const winW = w*0.26, winX = x0+w*0.10, winY = y0+h*0.10;
+  ctx.fillStyle = '#eaf6ff';
+  roundedRectPath(ctx, winX, winY, winW, winW*0.7, 4); ctx.fill();
+  ctx.strokeStyle = 'rgba(150,170,190,0.6)'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(winX+winW/2,winY); ctx.lineTo(winX+winW/2,winY+winW*0.7); ctx.stroke();
+
+  // rows of other desks, for atmosphere
+  ctx.fillStyle = 'rgba(120,110,100,0.25)';
+  for (let i=0;i<2;i++){
+    const dy = y0+h*0.32+i*h*0.18;
+    ctx.fillRect(x0+w*0.56, dy, w*0.34, h*0.09);
+  }
+
+  const deskW = w*0.5, deskX = x0+w*0.18, deskY = y0+h*0.70, deskH = h*0.08;
+  ctx.fillStyle = '#8a5a34';
+  ctx.fillRect(deskX, deskY, deskW, deskH);
+  ctx.fillStyle = '#6b4324';
+  ctx.fillRect(deskX+6, deskY+deskH, 5, h*0.14);
+  ctx.fillRect(deskX+deskW-11, deskY+deskH, 5, h*0.14);
+
+  ctx.fillStyle = '#fdfaf3';
+  ctx.fillRect(deskX+deskW*0.2, deskY-5, deskW*0.5, 9);
+  ctx.strokeStyle = 'rgba(0,0,0,0.15)'; ctx.lineWidth = 1;
+  for (let i=0;i<3;i++){
+    ctx.beginPath();
+    ctx.moveTo(deskX+deskW*0.24, deskY-2+i*2.2);
+    ctx.lineTo(deskX+deskW*0.62, deskY-2+i*2.2);
+    ctx.stroke();
+  }
+
+  const px = deskX+deskW*0.4, py = deskY-8;
+  ctx.save(); ctx.translate(px,py);
+  if (isGirl){
+    ctx.fillStyle = '#5a3f52';
+    ctx.beginPath();
+    ctx.moveTo(-13,10); ctx.quadraticCurveTo(-16,-18,0,-22);
+    ctx.quadraticCurveTo(16,-18,13,10); ctx.quadraticCurveTo(0,15,-13,10); ctx.fill();
+    ctx.save(); ctx.translate(0,-24); ctx.rotate(0.32);
+    ctx.fillStyle = '#7a4f63';
+    ctx.beginPath();
+    ctx.moveTo(-10,-2); ctx.quadraticCurveTo(-13,-16,0,-19);
+    ctx.quadraticCurveTo(13,-16,10,-2); ctx.quadraticCurveTo(10,7,13,14);
+    ctx.quadraticCurveTo(2,7,2,-4); ctx.quadraticCurveTo(0,-9,-5,-5);
+    ctx.quadraticCurveTo(-8,0,-10,-2); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#e9c1a0';
+    ctx.beginPath(); ctx.ellipse(0,-4,8.5,9.5,0,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  } else {
+    ctx.fillStyle = '#2f6b3f';
+    ctx.beginPath();
+    ctx.moveTo(-13,10); ctx.quadraticCurveTo(-16,-20,0,-24);
+    ctx.quadraticCurveTo(16,-20,13,10); ctx.quadraticCurveTo(0,15,-13,10); ctx.fill();
+    ctx.save(); ctx.translate(0,-28); ctx.rotate(0.3);
+    ctx.fillStyle = '#e7b98f';
+    ctx.beginPath(); ctx.ellipse(0,0,9,10,0,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#2a1e18';
+    ctx.beginPath();
+    ctx.moveTo(-8,-3); ctx.quadraticCurveTo(-9,-13,1,-13);
+    ctx.quadraticCurveTo(9,-13,7,-5); ctx.quadraticCurveTo(0,-8,-5,-5); ctx.fill();
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+function drawNightCallRoom(ctx, x0, y0, w, h, blanket, isGirl, t){
+  ctx.fillStyle = '#201a30';
+  ctx.fillRect(x0, y0, w, h);
+  for (let i=0;i<6;i++){
+    const sx = x0 + (i*37)%w, sy = y0 + (i*23)%(h*0.4);
+    const tw = 0.4+0.5*Math.abs(Math.sin(t*1.3+i));
+    ctx.beginPath(); ctx.fillStyle = `rgba(255,240,210,${tw*0.6})`; ctx.arc(sx,sy,1,0,Math.PI*2); ctx.fill();
+  }
+
+  const bedX = x0+w*0.14, bedY = y0+h*0.72, bedW = w*0.72, bedH = h*0.22;
+  ctx.fillStyle = blanket;
+  roundedRectPath(ctx, bedX, bedY, bedW, bedH, 12); ctx.fill();
+
+  const headX = bedX+bedW*0.30, headY = bedY-4;
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(headX,headY,11,10,0,0,Math.PI*2); ctx.fill();
+  if (isGirl){
+    ctx.fillStyle = '#7a4f63';
+    ctx.beginPath();
+    ctx.moveTo(headX-12,headY-2); ctx.quadraticCurveTo(headX-13,headY-16,headX,headY-18);
+    ctx.quadraticCurveTo(headX+13,headY-16,headX+12,headY-2);
+    ctx.quadraticCurveTo(headX,headY+8,headX-12,headY-2); ctx.fill();
+  } else {
+    ctx.fillStyle = '#2a1e18';
+    ctx.beginPath();
+    ctx.moveTo(headX-10,headY-3); ctx.quadraticCurveTo(headX-11,headY-15,headX,headY-15);
+    ctx.quadraticCurveTo(headX+9,headY-15,headX+8,headY-6);
+    ctx.quadraticCurveTo(headX,headY-10,headX-6,headY-8); ctx.fill();
+  }
+  // small smile, on a call
+  ctx.strokeStyle = '#4a3226'; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.arc(headX,headY+4,3,0.2,Math.PI-0.2); ctx.stroke();
+
+  // phone held to the ear
+  const phX = headX+13, phY = headY-2;
+  ctx.save(); ctx.translate(phX,phY); ctx.rotate(0.3);
+  ctx.fillStyle = '#e9e9e9';
+  roundedRectPath(ctx, -5, -10, 10, 20, 3); ctx.fill();
+  ctx.restore();
+  // little sound waves, showing the call is live
+  ctx.strokeStyle = `rgba(230,230,255,${0.5+0.3*Math.sin(t*3)})`;
+  ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.arc(phX+8,phY-2,6,-0.6,0.6); ctx.stroke();
+  ctx.beginPath(); ctx.arc(phX+8,phY-2,11,-0.6,0.6); ctx.stroke();
+
+  drawTinyHeart(ctx, x0+w*0.6, y0+h*0.18, 0.45, 0.5+0.3*Math.sin(t*2));
+}
+
+function drawJulyScene(ctx, W, H, t){
+  const dayH = H*0.47, gapH = H*0.06, nightY = dayH+gapH, nightH = H-nightY;
+
+  // day panel
+  const daySky = ctx.createLinearGradient(0,0,0,dayH);
+  daySky.addColorStop(0,'#bfe3f5'); daySky.addColorStop(1,'#e9f4ee');
+  ctx.fillStyle = daySky; ctx.fillRect(0,0,W,dayH);
+  const dayGap = W*0.06, dayRoomW = (W-dayGap)/2;
+  drawExamRoom(ctx, 0, 0, dayRoomW, dayH, false);
+  drawExamRoom(ctx, W-dayRoomW, 0, dayRoomW, dayH, true);
+  ctx.fillStyle = '#9db7c6'; ctx.fillRect(dayRoomW, 0, dayGap, dayH);
+  ctx.fillStyle = 'rgba(30,30,20,0.55)';
+  ctx.font = '12px Helvetica, Arial, sans-serif';
+  ctx.fillText('DAY — board exam, different rooms', 14, 18);
+
+  // divider strip with a little sun/moon
+  ctx.fillStyle = '#241a30';
+  ctx.fillRect(0, dayH, W, gapH);
+  ctx.beginPath(); ctx.fillStyle = '#f4d35e'; ctx.arc(W*0.5-16, dayH+gapH/2, 8, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.fillStyle = '#e9e6f2'; ctx.arc(W*0.5+16, dayH+gapH/2, 7, 0, Math.PI*2); ctx.fill();
+
+  // night panel
+  const nightSky = ctx.createLinearGradient(0,nightY,0,H);
+  nightSky.addColorStop(0,'#171233'); nightSky.addColorStop(1,'#221732');
+  ctx.fillStyle = nightSky; ctx.fillRect(0,nightY,W,nightH);
+  const nightGap = W*0.08, nightRoomW = (W-nightGap)/2;
+  drawNightCallRoom(ctx, 0, nightY, nightRoomW, nightH, '#3a4a63', false, t);
+  drawNightCallRoom(ctx, W-nightRoomW, nightY, nightRoomW, nightH, '#6a4a63', true, t);
+  ctx.fillStyle = '#171233'; ctx.fillRect(nightRoomW, nightY, nightGap, nightH);
+  ctx.fillStyle = 'rgba(255,255,255,0.45)';
+  ctx.font = '12px Helvetica, Arial, sans-serif';
+  ctx.fillText('NIGHT — on the phone, like always', 14, nightY+18);
+
+  // the call, in their own words
+  const convoTop = nightY + 20;
+  const h1 = drawChatBubble(ctx, W*0.5, convoTop+54, 'dekhsos ora ki baje question banaise kmne ki kormu bol', 300, 'right');
+  const h2 = drawChatBubble(ctx, W*0.5, convoTop+54+4+71, 'are tension nis na porte thak akta na akta hobei tui shob likhe ahis tailei holo r akhn amader romance talk er time akhn edi bolo kno hmmmm', 420, 'left');
+  drawChatBubble(ctx, W*0.5, convoTop+54+4+71+4+54, 'heda tor saradin romance romance kirbi ato romance diye huh', 300, 'right');
+}
+
+
+/* ---------------- AUGUST: a restaurant, a tight hug, a kiss, and a caption ---------------- */
+function drawAugustScene(ctx, W, H, t){
+  // wall
+  const bg = ctx.createLinearGradient(0,0,0,H*0.84);
+  bg.addColorStop(0,'#42241f'); bg.addColorStop(1,'#2a1614');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H*0.84);
+
+  // wallpaper stripes for texture
+  ctx.strokeStyle = 'rgba(0,0,0,0.12)'; ctx.lineWidth = 14;
+  for (let x=-40; x<W+40; x+=46){
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H*0.84); ctx.stroke();
+  }
+
+  // tiled floor
+  ctx.fillStyle = '#241412'; ctx.fillRect(0,H*0.84,W,H*0.16);
+  ctx.strokeStyle = 'rgba(0,0,0,0.35)'; ctx.lineWidth = 1.5;
+  for (let x=0; x<W; x+=34){
+    ctx.beginPath(); ctx.moveTo(x,H*0.84); ctx.lineTo(x+(W*0.02),H); ctx.stroke();
+  }
+
+  // window with a night skyline outside, curtains either side
+  const winX = W*0.06, winY = H*0.10, winW = W*0.24, winH = H*0.38;
+  ctx.fillStyle = '#0d1830';
+  ctx.fillRect(winX,winY,winW,winH);
+  for (let i=0;i<10;i++){
+    const bx = winX + (i*13)%(winW-10);
+    const by = winY + winH*0.3 + (i*23)%(winH*0.6);
+    ctx.fillStyle = `rgba(255,220,150,${0.4+0.3*Math.abs(Math.sin(t+i))})`;
+    ctx.fillRect(bx, by, 4, 5);
+  }
+  ctx.strokeStyle = '#1a1210'; ctx.lineWidth = 6;
+  ctx.strokeRect(winX,winY,winW,winH);
+  ctx.beginPath(); ctx.moveTo(winX+winW/2,winY); ctx.lineTo(winX+winW/2,winY+winH); ctx.stroke();
+  ctx.fillStyle = 'rgba(120,30,40,0.55)';
+  ctx.beginPath(); ctx.moveTo(winX-6,winY-6); ctx.quadraticCurveTo(winX-2,winY+winH*0.6,winX+10,winY+winH+6); ctx.lineTo(winX-2,winY+winH+6); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(winX+winW+6,winY-6); ctx.quadraticCurveTo(winX+winW+2,winY+winH*0.6,winX+winW-10,winY+winH+6); ctx.lineTo(winX+winW+2,winY+winH+6); ctx.closePath(); ctx.fill();
+
+  // framed art on the right wall
+  ctx.fillStyle = '#1a1210'; ctx.fillRect(W*0.80,H*0.14,W*0.14,H*0.20);
+  ctx.fillStyle = '#5a2f30'; ctx.fillRect(W*0.815,H*0.155,W*0.11,H*0.17);
+
+  // string lights along the ceiling
+  ctx.strokeStyle = 'rgba(0,0,0,0.4)'; ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  for (let x=0; x<=W; x+=40){
+    const sag = 10*Math.sin((x/W)*Math.PI);
+    if (x===0) ctx.moveTo(x, H*0.03+sag); else ctx.lineTo(x, H*0.03+sag);
+  }
+  ctx.stroke();
+  for (let x=10; x<W; x+=40){
+    const sag = 10*Math.sin((x/W)*Math.PI);
+    const glow = 0.5+0.4*Math.abs(Math.sin(t*2+x));
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,225,160,${glow})`;
+    ctx.arc(x, H*0.03+sag+5, 3, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // background tables with other diners, kept small and muted so the couple stays the focus
+  function bgDiner(x, y, scale){
+    ctx.save(); ctx.translate(x,y); ctx.scale(scale,scale);
+    ctx.fillStyle = 'rgba(20,10,10,0.5)';
+    ctx.beginPath(); ctx.ellipse(0,20,34,8,0,0,Math.PI*2); ctx.fill(); // table shadow/top
+    ctx.fillStyle = 'rgba(60,30,25,0.6)';
+    ctx.beginPath(); ctx.ellipse(-16,0,10,16,0,0,Math.PI*2); ctx.fill(); // diner 1
+    ctx.beginPath(); ctx.ellipse(16,0,10,16,0,0,Math.PI*2); ctx.fill(); // diner 2
+    ctx.beginPath(); ctx.fillStyle=`rgba(255,200,120,${0.5+0.2*Math.sin(t*4)})`; ctx.ellipse(0,14,2,4,0,0,Math.PI*2); ctx.fill(); // tiny candle
+    ctx.restore();
+  }
+  bgDiner(W*0.14, H*0.62, 0.6);
+  bgDiner(W*0.90, H*0.60, 0.55);
+
+  // a waiter passing in the background
+  const waiterX = W*0.62 + Math.sin(t*0.3)*W*0.05;
+  ctx.save(); ctx.translate(waiterX, H*0.60);
+  ctx.fillStyle = 'rgba(20,15,15,0.65)';
+  ctx.beginPath();
+  ctx.moveTo(-8,20); ctx.quadraticCurveTo(-10,-14,0,-16);
+  ctx.quadraticCurveTo(10,-14,8,20); ctx.quadraticCurveTo(0,24,-8,20); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(0,-20,6,7,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = 'rgba(230,220,210,0.5)';
+  ctx.fillRect(-10,-4,20,3); // tray held up
+  ctx.restore();
+
+  // ambient warm bokeh glow, like candlelight scattered through the room
+  for (let i=0;i<10;i++){
+    const bx=(i*137+t*8)%W, by=H*0.15+((i*71)%(H*0.5));
+    const r=5+((i*13)%8);
+    const a=0.12+0.08*Math.sin(t*1.5+i);
+    ctx.beginPath();
+    ctx.fillStyle=`rgba(255,200,140,${a})`;
+    ctx.arc(bx,by,r,0,Math.PI*2); ctx.fill();
+  }
+
+  // chairs, behind the couple
+  ctx.fillStyle = '#1a100e';
+  ctx.beginPath(); ctx.roundRect ? ctx.roundRect(W*0.5-46,H*0.42,20,H*0.24,6) : ctx.rect(W*0.5-46,H*0.42,20,H*0.24);
+  ctx.fill();
+  ctx.beginPath(); ctx.roundRect ? ctx.roundRect(W*0.5+26,H*0.42,20,H*0.24,6) : ctx.rect(W*0.5+26,H*0.42,20,H*0.24);
+  ctx.fill();
+
+  // the table, with a red-and-white bistro cloth
+  const tX = W*0.5, tY = H*0.74;
+  ctx.fillStyle = '#0f0908';
+  ctx.beginPath(); ctx.ellipse(tX,tY+4,92,17,0,0,Math.PI*2); ctx.fill(); // shadow under cloth
+  ctx.fillStyle = '#f3ece0';
+  ctx.beginPath(); ctx.ellipse(tX,tY,90,16,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = 'rgba(160,40,40,0.5)';
+  for (let i=-4;i<=4;i++){
+    ctx.beginPath(); ctx.ellipse(tX+i*20,tY,9,15.5,0,0,Math.PI*2);
+    if (i%2===0) ctx.fill();
+  }
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(255,200,90,${0.8+0.15*Math.sin(t*6)})`;
+  ctx.ellipse(tX,tY-24,3,6,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#f4d35e'; ctx.fillRect(tX-2,tY-20,4,16);
+
+  // pizza, on the left
+  ctx.save(); ctx.translate(tX-55, tY-2);
+  ctx.beginPath(); ctx.ellipse(0,0,26,10,0,0,Math.PI*2); ctx.fillStyle='#e8dcc8'; ctx.fill();
+  ctx.beginPath(); ctx.ellipse(0,-2,20,7,0,0,Math.PI*2); ctx.fillStyle='#e2b45a'; ctx.fill();
+  ctx.strokeStyle='rgba(120,70,20,0.4)'; ctx.lineWidth=1;
+  for (let i=0;i<4;i++){ const a=i*Math.PI/4; ctx.beginPath(); ctx.moveTo(0,-2); ctx.lineTo(Math.cos(a)*19,-2+Math.sin(a)*6.5); ctx.stroke(); }
+  ctx.fillStyle='#a83232';
+  for (let i=0;i<5;i++){ const ang=i*1.3; ctx.beginPath(); ctx.arc(Math.cos(ang)*10,-2+Math.sin(ang)*3.5,2,0,Math.PI*2); ctx.fill(); }
+  ctx.restore();
+
+  // pasta, on the right
+  ctx.save(); ctx.translate(tX+55, tY-2);
+  ctx.beginPath(); ctx.ellipse(0,0,24,10,0,0,Math.PI*2); ctx.fillStyle='#f3ece0'; ctx.fill();
+  ctx.beginPath(); ctx.ellipse(0,-1,18,7,0,0,Math.PI*2); ctx.fillStyle='#e0b878'; ctx.fill();
+  ctx.strokeStyle='#c99a52'; ctx.lineWidth=1.4;
+  for (let i=0;i<5;i++){
+    ctx.beginPath();
+    ctx.moveTo(-12+i*5,-1);
+    ctx.quadraticCurveTo(-8+i*5,-6,-4+i*5,-1);
+    ctx.quadraticCurveTo(0+i*5,4,4+i*5,-1);
+    ctx.stroke();
+  }
+  ctx.fillStyle='rgba(180,50,40,0.7)';
+  for (let i=0;i<4;i++){ ctx.beginPath(); ctx.arc(-8+i*5,-2+((i%2)?1:-1),2,0,Math.PI*2); ctx.fill(); }
+  ctx.restore();
+
+  // a glass of chocolate shake, front and center
+  ctx.save(); ctx.translate(tX, tY+6);
+  ctx.fillStyle='#c9a96a';
+  roundedRectPath(ctx,-8,-30,16,30,4); ctx.fill();
+  ctx.fillStyle='#5a3520';
+  roundedRectPath(ctx,-7,-28,14,24,3); ctx.fill();
+  ctx.fillStyle='#fff8ec';
+  ctx.beginPath(); ctx.ellipse(0,-28,7,4,0,0,Math.PI*2); ctx.fill();
+  ctx.strokeStyle='#e9dcc9'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(3,-34); ctx.lineTo(1,-4); ctx.stroke();
+  ctx.restore();
+
+  const cx = W*0.5, groundY = H*0.66;
+  ctx.save(); ctx.translate(cx,groundY);
+
+  // boy — black t-shirt
+  ctx.fillStyle = '#161616';
+  ctx.beginPath();
+  ctx.moveTo(-34,10); ctx.quadraticCurveTo(-38,-34,-8,-38);
+  ctx.quadraticCurveTo(14,-36,16,-4); ctx.quadraticCurveTo(0,10,-34,10); ctx.fill();
+
+  // girl — white dress, overlapping closely (a tight hug)
+  ctx.fillStyle = '#f3ece0';
+  ctx.beginPath();
+  ctx.moveTo(-4,12); ctx.quadraticCurveTo(-8,-30,20,-36);
+  ctx.quadraticCurveTo(40,-30,36,10); ctx.quadraticCurveTo(16,16,-4,12); ctx.fill();
+
+  // his arm, wrapped fully around her back
+  ctx.fillStyle = '#161616';
+  ctx.beginPath();
+  ctx.moveTo(10,-30); ctx.quadraticCurveTo(40,-24,42,4);
+  ctx.quadraticCurveTo(38,14,28,10); ctx.quadraticCurveTo(32,-14,6,-26);
+  ctx.fill();
+
+  // her arm, wrapped fully around his back — both holding on tight
+  ctx.fillStyle = '#f3ece0';
+  ctx.beginPath();
+  ctx.moveTo(-6,-28); ctx.quadraticCurveTo(-36,-22,-38,4);
+  ctx.quadraticCurveTo(-34,13,-24,9); ctx.quadraticCurveTo(-28,-13,-2,-24);
+  ctx.fill();
+
+  // boy head
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(-10,-44,12,13,0.15,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#2a1e18';
+  ctx.beginPath();
+  ctx.moveTo(-22,-46); ctx.quadraticCurveTo(-23,-60,-9,-60);
+  ctx.quadraticCurveTo(3,-60,1,-48); ctx.quadraticCurveTo(-9,-54,-17,-50); ctx.fill();
+
+  // girl head, tilted in to meet his — the kiss
+  ctx.save(); ctx.translate(14,-42); ctx.rotate(-0.25);
+  ctx.fillStyle = '#7a4f63';
+  ctx.beginPath();
+  ctx.moveTo(-12,-2); ctx.quadraticCurveTo(-16,-22,0,-25);
+  ctx.quadraticCurveTo(16,-22,12,-2); ctx.quadraticCurveTo(12,10,16,20);
+  ctx.quadraticCurveTo(2,10,2,-4); ctx.quadraticCurveTo(0,-12,-6,-6);
+  ctx.quadraticCurveTo(-10,0,-12,-2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#e9c1a0';
+  ctx.beginPath(); ctx.ellipse(0,-4,11,12,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+
+  ctx.restore();
+
+  drawTinyHeart(ctx, cx+2, groundY-100, 1.1+0.1*Math.sin(t*3), 0.95);
+  drawTinyHeart(ctx, cx-14, groundY-108, 0.7+0.08*Math.sin(t*3+1), 0.8);
+
+  // subtitle-style caption
+  ctx.textAlign = 'center';
+  ctx.font = 'italic 28px "Iowan Old Style", Georgia, serif';
+  ctx.fillStyle = 'rgba(0,0,0,0.5)';
+  ctx.fillText('Chu', W*0.5+1, H*0.94+1);
+  ctx.fillStyle = '#fbeee4';
+  ctx.fillText('Chu', W*0.5, H*0.94);
+  ctx.textAlign = 'left';
+}
+
+/* ---------------- SEPTEMBER: 8-month anniversary, cheerful celebration ---------------- */
+function drawSeptemberScene(ctx, W, H, t){
+  const sky = ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'#fdeaf0'); sky.addColorStop(1,'#fff6df');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = '#f3e0c8'; ctx.fillRect(0,H*0.82,W,H*0.18);
+
+  // special feature: a string of pennant flags across the top
+  (function pennantBanner(){
+    const y = H*0.05;
+    ctx.strokeStyle = 'rgba(0,0,0,0.2)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(W*0.1,y); ctx.lineTo(W*0.9,y); ctx.stroke();
+    const colors = ['#e79bb0','#f4d35e','#8fbf7f','#7fb3d5','#c98adf'];
+    for (let i=0;i<9;i++){
+      const x = W*0.1 + i*(W*0.8/8);
+      ctx.beginPath();
+      ctx.moveTo(x-10,y); ctx.lineTo(x+10,y); ctx.lineTo(x,y+18); ctx.closePath();
+      ctx.fillStyle = colors[i%colors.length]; ctx.fill();
+    }
+  })();
+
+  // special feature: fireworks bursting in the sky
+  function firework(x,y,phase,rgb){
+    const cycle = (t+phase) % 3;
+    const launchDur = 0.4, burstDur = 1.4;
+    if (cycle < launchDur){
+      // special feature: a rising rocket trail before the burst
+      const p = cycle/launchDur;
+      const ry = H - p*(H-y);
+      ctx.beginPath(); ctx.fillStyle = `rgba(${rgb},0.9)`;
+      ctx.arc(x, ry, 2.4, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = `rgba(${rgb},0.3)`; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x,ry); ctx.lineTo(x, Math.min(H,ry+14)); ctx.stroke();
+    } else if (cycle < launchDur+burstDur){
+      const p = (cycle-launchDur)/burstDur, r = p*60, alpha = (1-p)*0.9;
+      for (let i=0;i<10;i++){
+        const a = (i/10)*Math.PI*2;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(${rgb},${alpha})`;
+        ctx.arc(x+Math.cos(a)*r, y+Math.sin(a)*r, 2.2, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+  }
+  firework(W*0.15, H*0.20, 0, '231,155,176');
+  firework(W*0.85, H*0.16, 1, '244,211,94');
+  firework(W*0.5, H*0.10, 2, '143,191,127');
+
+  // special feature: floating music notes, like they're dancing to something
+  (function musicNotes(){
+    for (let i=0;i<5;i++){
+      const cycle = (t*0.6 + i*0.7) % 4;
+      const mx = W*0.5 + Math.sin(i*2+t)*(60+i*20) + (i-2)*40;
+      const my = H*0.88 - cycle*140;
+      const alpha = Math.max(0, 1-cycle/4);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.font = '20px serif';
+      ctx.fillStyle = '#d9738f';
+      ctx.fillText(i%2===0 ? '♪' : '♫', mx, my);
+      ctx.restore();
+    }
+  })();
+
+  const confettiColors = ['#e79bb0','#f4d35e','#8fbf7f','#7fb3d5','#c98adf'];
+  for (let i=0;i<60;i++){
+    const cx=(i*53 + t*40)%W;
+    const cy=(i*97 + t*140)%H;
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(t*3+i);
+    ctx.fillStyle = confettiColors[i%confettiColors.length];
+    ctx.fillRect(-3,-5,6,10);
+    ctx.restore();
+  }
+
+  ctx.textAlign = 'center';
+  ctx.font = 'bold 30px "Iowan Old Style", Georgia, serif';
+  ctx.fillStyle = '#d9738f';
+  ctx.fillText('8 MONTHS ♥', W*0.5, H*0.16);
+  ctx.textAlign = 'left';
+
+  function balloon(x,y,color){
+    ctx.save(); ctx.translate(x,y);
+    ctx.strokeStyle = 'rgba(0,0,0,0.2)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0,18); ctx.lineTo(0,46); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(0,0,16,20,0,0,Math.PI*2);
+    ctx.fillStyle = color; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(-5,-6,4,6,0.4,0,Math.PI*2);
+    ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.fill();
+    ctx.restore();
+  }
+  balloon(W*0.18, H*0.36+Math.sin(t*1.2)*6, '#e79bb0');
+  balloon(W*0.28, H*0.28+Math.sin(t*1.5+1)*6, '#f4d35e');
+  balloon(W*0.78, H*0.34+Math.sin(t*1.3+2)*6, '#8fbf7f');
+  balloon(W*0.86, H*0.26+Math.sin(t*1.1+3)*6, '#7fb3d5');
+
+  const cakeX = W*0.5, cakeY = H*0.72;
+  ctx.fillStyle = '#f3ece0'; roundedRectPath(ctx,cakeX-46,cakeY-10,92,26,6); ctx.fill();
+  ctx.fillStyle = '#c9748f'; roundedRectPath(ctx,cakeX-40,cakeY-30,80,22,6); ctx.fill();
+  ctx.fillStyle = '#fdfaf3';
+  for (let i=0;i<6;i++){ ctx.beginPath(); ctx.arc(cakeX-34+i*14,cakeY-30,4,0,Math.PI*2); ctx.fill(); }
+  ctx.fillStyle = '#f4d35e'; ctx.fillRect(cakeX-3,cakeY-50,6,20);
+  ctx.font = 'bold 12px Helvetica, Arial, sans-serif'; ctx.fillStyle = '#5a3226'; ctx.textAlign = 'center';
+  ctx.fillText('8', cakeX, cakeY-38);
+  ctx.textAlign = 'left';
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(255,200,90,${0.8+0.15*Math.sin(t*6)})`;
+  ctx.ellipse(cakeX,cakeY-54,3,6,0,0,Math.PI*2); ctx.fill();
+
+  // freshly-drawn celebrating couple — standing, party hats, one arm raised each, holding each other with the other
+  const groundY = H*0.88;
+
+  // special feature: a warm spotlight glow behind them
+  const spot = ctx.createRadialGradient(W*0.5,groundY-40,10,W*0.5,groundY-40,150);
+  spot.addColorStop(0,'rgba(255,220,150,0.35)');
+  spot.addColorStop(1,'rgba(255,220,150,0)');
+  ctx.fillStyle = spot;
+  ctx.beginPath(); ctx.arc(W*0.5,groundY-40,150,0,Math.PI*2); ctx.fill();
+
+  // boy
+  ctx.save(); ctx.translate(W*0.5-34, groundY);
+  ctx.fillStyle = '#233a2a';
+  ctx.beginPath(); ctx.ellipse(-8,20,9,14,0,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(8,20,9,14,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#2f6b3f';
+  ctx.beginPath();
+  ctx.moveTo(-16,10); ctx.quadraticCurveTo(-20,-40,0,-46);
+  ctx.quadraticCurveTo(20,-40,16,10); ctx.quadraticCurveTo(0,16,-16,10); ctx.fill();
+  ctx.save(); ctx.translate(-14,-30); ctx.rotate(-2.2 + Math.sin(t*3)*0.1);
+  ctx.fillStyle = '#2f6b3f'; ctx.beginPath(); ctx.ellipse(0,0,7,22,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+  ctx.beginPath(); ctx.ellipse(16,-6,14,7,0.3,0,Math.PI*2); ctx.fillStyle = '#2f6b3f'; ctx.fill();
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(-2,-52,12,13,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#2a1e18';
+  ctx.beginPath();
+  ctx.moveTo(-14,-54); ctx.quadraticCurveTo(-15,-68,0,-68);
+  ctx.quadraticCurveTo(12,-68,10,-56); ctx.quadraticCurveTo(0,-62,-8,-58); ctx.fill();
+  ctx.strokeStyle = '#5a3226'; ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.arc(-2,-48,5,0.15,Math.PI-0.15); ctx.stroke();
+  ctx.save(); ctx.translate(-2,-64); ctx.rotate(-0.15);
+  ctx.beginPath(); ctx.moveTo(-9,0); ctx.lineTo(9,0); ctx.lineTo(0,-24); ctx.closePath();
+  ctx.fillStyle = '#7fb3d5'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0,-24,3,0,Math.PI*2); ctx.fillStyle = '#fdfaf3'; ctx.fill();
+  ctx.restore();
+  ctx.restore();
+
+  // girl
+  ctx.save(); ctx.translate(W*0.5+34, groundY);
+  ctx.fillStyle = '#3f2c37';
+  ctx.beginPath(); ctx.ellipse(-8,20,8,13,0,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(8,20,8,13,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#5a3f52';
+  ctx.beginPath();
+  ctx.moveTo(-15,10); ctx.quadraticCurveTo(-19,-36,0,-42);
+  ctx.quadraticCurveTo(19,-36,15,10); ctx.quadraticCurveTo(0,16,-15,10); ctx.fill();
+  ctx.save(); ctx.translate(14,-28); ctx.rotate(2.2 - Math.sin(t*3+1)*0.1);
+  ctx.fillStyle = '#5a3f52'; ctx.beginPath(); ctx.ellipse(0,0,6.5,20,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+  ctx.beginPath(); ctx.ellipse(-16,-4,13,7,-0.3,0,Math.PI*2); ctx.fillStyle = '#5a3f52'; ctx.fill();
+  ctx.fillStyle = '#7a4f63';
+  ctx.beginPath();
+  ctx.moveTo(-14,-30);
+  ctx.quadraticCurveTo(-18,-56,0,-60);
+  ctx.quadraticCurveTo(18,-56,14,-30);
+  ctx.quadraticCurveTo(16,-14,20,2);
+  ctx.lineTo(-14,2);
+  ctx.quadraticCurveTo(-16,-14,-14,-30);
+  ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#e9c1a0';
+  ctx.beginPath(); ctx.ellipse(0,-44,11,12,0,0,Math.PI*2); ctx.fill();
+  ctx.strokeStyle = '#5a3226'; ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.arc(0,-40,5,0.15,Math.PI-0.15); ctx.stroke();
+  ctx.save(); ctx.translate(0,-58); ctx.rotate(0.15);
+  ctx.beginPath(); ctx.moveTo(-8,0); ctx.lineTo(8,0); ctx.lineTo(0,-20); ctx.closePath();
+  ctx.fillStyle = '#e79bb0'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0,-20,2.6,0,Math.PI*2); ctx.fillStyle = '#fdfaf3'; ctx.fill();
+  ctx.restore();
+  ctx.restore();
+
+  // special feature: a lit sparkler in her raised hand
+  (function sparkler(){
+    const sx = W*0.5+34+32, sy = groundY-52;
+    ctx.strokeStyle = '#c9c9c9'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(sx,sy+18); ctx.lineTo(sx,sy); ctx.stroke();
+    for (let i=0;i<8;i++){
+      const ang = (i/8)*Math.PI*2 + t*4;
+      const rr = 4 + (Math.sin(t*10+i)+1)*3;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255,${210+Math.floor(30*Math.sin(t*8+i))},150,${0.6+0.4*Math.sin(t*12+i)})`;
+      ctx.arc(sx+Math.cos(ang)*rr, sy+Math.sin(ang)*rr, 1.4, 0, Math.PI*2);
+      ctx.fill();
+    }
+  })();
+
+  for (let i=0;i<20;i++){
+    const sx=(i*71)%W, sy=(i*113)%(H*0.6);
+    const tw=0.3+0.6*Math.abs(Math.sin(t*2+i));
+    ctx.beginPath(); ctx.fillStyle=`rgba(255,255,255,${tw})`;
+    ctx.arc(sx,sy,1.6,0,Math.PI*2); ctx.fill();
+  }
+}
+
+/* ---------------- A DREAM: the wedding, soft and blurred ---------------- */
+function drawDreamScene(ctx, W, H, t){
+  const sky = ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'#fbe6f0'); sky.addColorStop(0.5,'#f3d9e8'); sky.addColorStop(1,'#e8d9f3');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H);
+
+  for (let i=0;i<5;i++){
+    const cx=(i*180+t*10)%(W+200)-100;
+    const cy=H*0.15+i*20;
+    const grad=ctx.createRadialGradient(cx,cy,10,cx,cy,120);
+    grad.addColorStop(0,'rgba(255,255,255,0.5)');
+    grad.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(cx,cy,120,0,Math.PI*2); ctx.fill();
+  }
+
+  ctx.fillStyle = '#e9d9c8'; ctx.fillRect(0,H*0.78,W,H*0.22);
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.fillRect(W*0.42,H*0.78,W*0.16,H*0.22);
+
+  ctx.strokeStyle = '#c9748f'; ctx.lineWidth = 10;
+  ctx.beginPath(); ctx.arc(W*0.5,H*0.6,W*0.28,Math.PI,0); ctx.stroke();
+  for (let i=0;i<14;i++){
+    const a = Math.PI + (i/13)*Math.PI;
+    const fx = W*0.5+Math.cos(a)*W*0.28, fy = H*0.6+Math.sin(a)*W*0.28;
+    ctx.beginPath(); ctx.fillStyle = i%2===0 ? '#f0a8c0' : '#fdfaf3';
+    ctx.arc(fx,fy,7,0,Math.PI*2); ctx.fill();
+  }
+
+  for (let i=0;i<20;i++){
+    const px=(i*61 + t*20)%W;
+    const py=(i*83 + t*50)%H;
+    ctx.save(); ctx.translate(px,py); ctx.rotate(t+i);
+    ctx.fillStyle = 'rgba(240,168,192,0.6)';
+    ctx.beginPath(); ctx.ellipse(0,0,4,7,0,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  const cx = W*0.5, groundY = H*0.74;
+
+  // boy, in a suit
+  ctx.save(); ctx.translate(cx-22, groundY);
+  ctx.fillStyle = '#1c2430';
+  ctx.beginPath();
+  ctx.moveTo(-16,10); ctx.quadraticCurveTo(-20,-40,0,-46);
+  ctx.quadraticCurveTo(20,-40,16,10); ctx.quadraticCurveTo(0,16,-16,10); ctx.fill();
+  ctx.fillStyle = '#f3ece0';
+  ctx.beginPath(); ctx.moveTo(-6,-30); ctx.lineTo(6,-30); ctx.lineTo(3,4); ctx.lineTo(-3,4); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#8a1c2c';
+  ctx.beginPath(); ctx.moveTo(-3,-28); ctx.lineTo(3,-28); ctx.lineTo(2,0); ctx.lineTo(0,6); ctx.lineTo(-2,0); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#e7b98f';
+  ctx.beginPath(); ctx.ellipse(0,-52,12,13,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#2a1e18';
+  ctx.beginPath();
+  ctx.moveTo(-12,-54); ctx.quadraticCurveTo(-13,-68,0,-68);
+  ctx.quadraticCurveTo(12,-68,10,-56); ctx.quadraticCurveTo(0,-62,-8,-58); ctx.fill();
+  ctx.restore();
+
+  // girl, in a saree with a matching hijab
+  ctx.save(); ctx.translate(cx+22, groundY);
+  ctx.fillStyle = '#8a1c2c';
+  ctx.beginPath();
+  ctx.moveTo(-20,12); ctx.quadraticCurveTo(-24,-38,0,-44);
+  ctx.quadraticCurveTo(24,-38,20,12); ctx.quadraticCurveTo(0,18,-20,12); ctx.fill();
+  ctx.fillStyle = '#e0b23a';
+  ctx.beginPath();
+  ctx.moveTo(-18,-30); ctx.quadraticCurveTo(2,-10,14,10); ctx.lineTo(8,14); ctx.quadraticCurveTo(-4,-8,-22,-24); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = '#e0b23a'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(-20,10); ctx.quadraticCurveTo(0,16,20,10); ctx.stroke();
+
+  ctx.fillStyle = '#7a2030';
+  ctx.beginPath();
+  ctx.moveTo(-15,-34);
+  ctx.quadraticCurveTo(-20,-62,0,-68);
+  ctx.quadraticCurveTo(20,-62,15,-34);
+  ctx.quadraticCurveTo(18,-16,13,4);
+  ctx.lineTo(-13,4);
+  ctx.quadraticCurveTo(-18,-16,-15,-34);
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = '#e0b23a'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-15,-34); ctx.quadraticCurveTo(-20,-62,0,-68); ctx.quadraticCurveTo(20,-62,15,-34);
+  ctx.stroke();
+
+  ctx.fillStyle = '#e9c1a0';
+  ctx.beginPath(); ctx.ellipse(0,-48,11,12,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#e0b23a'; ctx.beginPath(); ctx.arc(0,-52,1.6,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+
+  drawTinyHeart(ctx, cx, groundY-96, 1+0.08*Math.sin(t*3), 0.9);
+}
+
+const MONTH_SCENE_DRAWERS = {
+  feb: drawFebruaryScene,
+  mar: drawMarchScene,
+  apr: drawAprilScene,
+  may: drawMayScene,
+  jun: drawJuneScene,
+  jul: drawJulyScene,
+  aug: drawAugustScene,
+  sep: drawSeptemberScene
+};
+
+function initMonthScene(mode, key, skyColor){
+  const canvas = document.getElementById(`${mode}MonthCanvas_${key}`);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const custom = MONTH_SCENE_DRAWERS[key];
+  const rand = makeRand(key.charCodeAt(0)*7 + key.charCodeAt(1)*3 + (mode === 'dev' ? 11 : 29));
+  let start = performance.now();
+  function loop(now){
+    const t = (now - start) / 1000;
+    if (custom) custom(ctx, W, H, t);
+    else drawMonthCoupleScene(ctx, W, H, t, skyColor, rand);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
+function initDreamScene(mode){
+  const canvas = document.getElementById(mode + 'DreamCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  let start = performance.now();
+  function loop(now){
+    const t = (now-start)/1000;
+    drawDreamScene(ctx, W, H, t);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
+buildJourney('dev');
+buildJourney('viewer');
+startJourneyTimer();
+initJanuaryScene('dev');
+initJanuaryScene('viewer');
+initDreamScene('dev');
+initDreamScene('viewer');
+JOURNEY_MONTHS.filter(m => m.key !== 'jan').forEach(m => {
+  initMonthScene('dev', m.key, m.sky);
+  initMonthScene('viewer', m.key, m.sky);
+});
+</script>
+</body>
+</html>
